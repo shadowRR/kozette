@@ -1,0 +1,28 @@
+<head>
+    <title>Kozette</title>
+</head>
+
+<body style="background: #f8f8f8;">
+
+    <!-- body -->
+    <div class="ui padded grid">
+
+        <!-- users -->
+        <div class="two wide column">
+            <div class="ui segment">
+                {{> loginButtons}}
+            </div>
+            <div class="ui segment">
+                {{> users}}
+            </div>
+        </div>
+
+        <!-- messages -->
+        <div class="fourteen wide column">
+            {{> messages}}
+            {{> send}}
+        </div>
+
+    </div>
+
+</body>

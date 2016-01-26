@@ -1,0 +1,21 @@
+<template name="messages">
+
+    <div class="ui one column grid" style="height: 95vh;overflow: auto;">
+
+        <div class="column">
+
+            {{#each messages}}
+                {{#with message=this user=user}}
+                    <div class="ui segment" style="border-left: 3px solid {{user.profile.color}}">
+                        <span style="color: {{user.profile.color}}">{{user.profile.username}}</span>
+                        <em style="font-size: .8em;color: #dedede;">({{time}})</em>
+                        {{message.message}}
+                    </div>
+                {{/with}}
+            {{/each}}
+
+        </div>
+
+    </div>
+
+</template>
