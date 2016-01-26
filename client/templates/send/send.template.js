@@ -20,10 +20,32 @@ Template.send.events({
     'submit form': function(e) {
         e.preventDefault();
 
+        const text = $('[name=message]').val() || null;
+
+        // detect if using an included command or
+        // just sending a new message
+        //
+        // for the nick command
+        const nickRegEx = /^\/nick\s/;
+        if(nickRegEx.test(text)) {
+            const nick = text.substring(text.indexOf(' ')+1);
+            Meteor.users.update(Meteor.userId() , {$set: {'profile.username': nick}});
+            $('form')[0].reset();
+            return;
+        }
+        // for the color command
+        const colorRegEx = /^\/color\s/;
+        if(colorRegEx.test(text)) {
+            const color = text.substring(text.indexOf(' ')+1);
+            Meteor.users.update(Meteor.userId() , {$set: {'profile.color': color}});
+            $('form')[0].reset();
+            return;
+        }
+
         let message = new Message();
         message.set({
             user_id: Meteor.userId(),
-            message: $('[name=message]').val() || null,
+            message: text,
             created_at: new Date()
         });
         if(message.validate()) {
