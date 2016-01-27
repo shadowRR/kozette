@@ -22,6 +22,15 @@ Message = Astro.Class({
                 Validators.string(),
                 Validators.minLength(0)
             ]
+        },
+        type: {
+            type: 'string',
+            immutable: true,
+            validator: [
+                Validators.required(),
+                Validators.string(),
+                Validators.choice(['basic', 'info'])
+            ]
         }
     },
     behaviors: {

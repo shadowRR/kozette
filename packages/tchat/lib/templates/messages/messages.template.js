@@ -21,18 +21,12 @@ Template.messages.helpers({
         return query;
     },
     /**
-     * @summary humanize the time
+     * @summary get the type of message
+     * to select the proper template
      * @return {string}
      */
-    time() {
-        return moment(this.message.created_at).format('D/MM/YYYY - HH:mm');
-    },
-    /**
-     * @summary get the current user data
-     * @return {object}
-     */
-    user() {
-        return Meteor.users.findOne(this.message.user_id);
+    type() {
+        return `message_${this.type}`;
     }
 });
 

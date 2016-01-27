@@ -30,7 +30,7 @@ Template.send.events({
             message.set({
                 user_id: Meteor.userId(),
                 message: text,
-                created_at: new Date()
+                type: 'basic'
             });
             if(message.validate()) {
                 message.save();

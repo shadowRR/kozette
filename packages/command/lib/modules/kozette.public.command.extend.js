@@ -5,7 +5,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand(message) {
-        const reg = /^\/(nick|color)\s/;
+        const reg = /^\/(nick|color|me)\s/;
         return reg.test(message);
     },
     /**
@@ -26,6 +26,15 @@ let command = {
         if(colorRegEx.test(command)) {
             const color = command.substring(command.indexOf(' ')+1);
             Meteor.users.update(Meteor.userId() , {$set: {'profile.color': color}});
+            return;
+        }
+        // for the /me command
+        const meRegEx = /^\/me\s/;
+        if(meRegEx.test(command)) {
+            let message = new Message();
+            const text = command.substring(command.indexOf(' ')+1);
+            message.set({ user_id: Meteor.userId(), message: text, type: 'info' });
+            message.validate() && message.save();
             return;
         }
     }

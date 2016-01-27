@@ -1,0 +1,10 @@
+<template name="message_basic">
+
+    {{#let user=user}}
+        <div class="ui segment" style="border-left: 3px solid {{user.profile.color}}">
+            <span style="color: {{user.profile.color}}">{{user.profile.username}}</span>
+            <em style="font-size: .8em;color: #dedede;">({{time}})</em> {{message}}
+        </div>
+    {{/let}}
+
+</template>
