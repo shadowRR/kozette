@@ -1,0 +1,12 @@
+body {
+    background: #f8f8f8;
+}
+
+.navbar {
+    padding-right: 0 !important;
+    background: #34495e;
+}
+
+.login-link-text {
+    color: white !important;
+}

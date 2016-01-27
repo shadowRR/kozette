@@ -44,6 +44,11 @@ Message = Astro.Class({
             fields: {
                 user_id: 1
             }
+        },
+        creation: {
+            fields: {
+                created_at: -1
+            }
         }
     }
 });

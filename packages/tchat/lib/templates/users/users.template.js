@@ -7,14 +7,14 @@ Template.users.helpers({
      * @return {cursor}
      */
     online: function() {
-        return Meteor.users.find({'status.online': true});
+        return Meteor.users.find({'statusConnection': {$not: 'offline'} });
     },
     /**
      * @summary get list of offline users
      * @return {cursor}
      */
     offline() {
-        return Meteor.users.find({'status.online': false});
+        return Meteor.users.find({'statusConnection': 'offline'});
     }
 });
 

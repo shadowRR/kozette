@@ -12,7 +12,10 @@ Package.onUse(function(api) {
 
   api.addFiles('lib/collections/messages.collections.js', ['client', 'server']);
 
+  api.addFiles('lib/publications/tchat.publications.js', 'server');
+
   api.addFiles('lib/templates/main.html', 'client');
+  api.addFiles('lib/styles/styles.css', 'client');
   api.addFiles('lib/templates/messages/messages.template.html', 'client');
   api.addFiles('lib/templates/messages/messages.template.js', 'client');
   api.addFiles('lib/templates/messages/type/message_basic.html', 'client');

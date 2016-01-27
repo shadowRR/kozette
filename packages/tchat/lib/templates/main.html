@@ -2,19 +2,24 @@
     <title>Kozette</title>
 </head>
 
-<body style="background: #f8f8f8;">
+<body>
 
     <!-- body -->
-    <div class="ui padded grid">
+    <div class="ui grid">
 
         <!-- users -->
-        <div class="two wide column" style="background: #34495e;">
-            <div class="ui segment">
+        <div class="two wide column navbar">
+
+            <!-- login -->
+            <div class="ui tall stacked padded segment" style="background: #2c3e50;">
                 {{> loginButtons}}
             </div>
+
+            <!-- users list -->
             <div class="ui basic segment">
                 {{> users}}
             </div>
+
         </div>
 
         <!-- messages -->
