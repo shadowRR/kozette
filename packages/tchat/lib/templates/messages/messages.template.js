@@ -9,7 +9,7 @@ Template.messages.helpers({
     messages() {
         // prepare the sound to trigger
         // when receiving a new message
-        let sound = new buzz.sound('/notify.wav');
+        let sound = new buzz.sound('packages/kozette_tchat/sound/kozette.wav');
         let query = Messages.find({}, {sort: {created_at: 1}});
         query.observeChanges({
             added(id, doc) {
@@ -21,7 +21,7 @@ Template.messages.helpers({
         return query;
     },
     /**
-     * @summary humazine the time
+     * @summary humanize the time
      * @return {string}
      */
     time() {

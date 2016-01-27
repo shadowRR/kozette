@@ -1,0 +1,31 @@
+<template name="users">
+
+    <div class="ui teal label">Online</div>
+    <div class="ui segment" style="padding:.5em 1em;">
+        <div class="ui middle aligned divided list">
+            {{#each online}}
+                <div class="item">
+                    <i class="circle middle aligned icon" style="color: {{profile.color}}"></i>
+                    <div class="content">
+                        {{profile.username}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="ui red label">Offline</div>
+    <div class="ui segment" style="padding:.5em 1em;">
+        <div class="ui middle aligned divided list">
+            {{#each offline}}
+            <div class="item">
+                <i class="circle middle aligned icon" style="color: {{profile.color}}"></i>
+                <div class="content">
+                    {{profile.username}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+</template>
