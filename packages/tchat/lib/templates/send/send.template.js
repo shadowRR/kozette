@@ -33,7 +33,7 @@ Template.send.events({
                 type: 'basic'
             });
             if(message.validate()) {
-                message.save();
+                Meteor.call('message.insert', message, (err) => { if(err)console.log(err); } );
                 $('form')[0].reset();
             }
         }

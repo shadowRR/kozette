@@ -52,9 +52,3 @@ Message = Astro.Class({
         }
     }
 });
-
-Messages.allow({
-    insert: function(user_id, doc){
-        return doc && doc.user_id === user_id;
-    }
-});

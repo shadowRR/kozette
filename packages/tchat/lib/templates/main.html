@@ -4,14 +4,12 @@
 
 <body>
 
-    <!-- body -->
-    <div class="ui grid">
+    <div class="ui padded equal height grid">
 
-        <!-- users -->
         <div class="two wide column navbar">
 
             <!-- login -->
-            <div class="ui tall stacked padded segment" style="background: #2c3e50;">
+            <div class="ui tall stacked padded segment" style="background: #2c3e50; margin-left: -1em; margin-top: -1em;">
                 {{> loginButtons}}
             </div>
 
@@ -22,8 +20,7 @@
 
         </div>
 
-        <!-- messages -->
-        <div class="fourteen wide column">
+        <div class="fourteen wide stretched column">
             {{> messages}}
             {{> send}}
         </div>

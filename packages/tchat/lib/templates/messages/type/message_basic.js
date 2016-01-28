@@ -7,7 +7,7 @@ Template.message_basic.helpers({
      * @return {string}
      */
     time() {
-        return moment(this.message.created_at).format('D/MM/YYYY - HH:mm');
+        return moment(this.created_at).format('D/MM/YYYY - HH:mm');
     },
     /**
      * @summary get the current user data

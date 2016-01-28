@@ -34,7 +34,7 @@ let command = {
             let message = new Message();
             const text = command.substring(command.indexOf(' ')+1);
             message.set({ user_id: Meteor.userId(), message: text, type: 'info' });
-            message.validate() && message.save();
+            message.validate() && Meteor.call('message.insert', message, (err) => { if(err)console.log(err); } );
             return;
         }
     }

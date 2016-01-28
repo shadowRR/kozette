@@ -1,14 +1,10 @@
 <template name="messages">
 
-    <div class="ui one column grid" style="height: 95vh;overflow: auto;">
+    <div class="message list">
 
-        <div class="column">
-
-            {{#each messages}}
-                {{> Template.dynamic template=type}}
-            {{/each}}
-
-        </div>
+        {{#each messages}}
+            {{> Template.dynamic template=type}}
+        {{/each}}
 
     </div>
 

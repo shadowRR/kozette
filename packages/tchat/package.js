@@ -13,6 +13,7 @@ Package.onUse(function(api) {
   api.addFiles('lib/collections/messages.collections.js', ['client', 'server']);
 
   api.addFiles('lib/publications/tchat.publications.js', 'server');
+  api.addFiles('lib/collections/messages.collections.methods.js', 'server');
 
   api.addFiles('lib/templates/main.html', 'client');
   api.addFiles('lib/styles/styles.css', 'client');
