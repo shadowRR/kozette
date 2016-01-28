@@ -23,6 +23,8 @@ Package.onUse(function(api) {
   api.addFiles('lib/templates/messages/type/message_basic.js', 'client');
   api.addFiles('lib/templates/messages/type/message_info.html', 'client');
   api.addFiles('lib/templates/messages/type/message_info.js', 'client');
+  api.addFiles('lib/templates/messages/type/message_status.html', 'client');
+  api.addFiles('lib/templates/messages/type/message_status.js', 'client');
   api.addFiles('lib/templates/send/send.template.html', 'client');
   api.addFiles('lib/templates/send/send.template.js', 'client');
   api.addFiles('lib/templates/users/users.template.html', 'client');
