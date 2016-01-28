@@ -21,7 +21,6 @@ Package.onUse(function(api) {
         'jagi:astronomy',
         'jagi:astronomy-validators',
         'jagi:astronomy-timestamp-behavior',
-        'konecty:user-presence',
         'semantic:ui',
         'flemay:less-autoprefixer'
     ];
@@ -30,7 +29,6 @@ Package.onUse(function(api) {
     api.imply(packages);
 
     api.addFiles('lib/modules/kozette.public.init.js', ['client', 'server']);
-    api.addFiles('lib/modules/startup.js', ['client', 'server']);
 
     api.export(['Kozette']);
 });

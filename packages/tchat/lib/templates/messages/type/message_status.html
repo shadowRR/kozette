@@ -1,8 +1,11 @@
 <template name="message_status">
 
-    <div class="ui padded stacked {{color}} inverted segment">
-        <i class="info icon"></i>
-        {{text}}
-    </div>
+    {{#let user=user}}
+        <div class="ui inverted segment" style="border-left: 3px solid {{user.profile.color}}">
+            <span style="color: {{user.profile.color}}">{{user.profile.username}}</span>
+            <em style="font-size: .8em;color: #dedede;">({{time}})</em>
+            <span style="color: {{color}}">{{message}}</span>
+        </div>
+    {{/let}}
 
 </template>

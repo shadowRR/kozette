@@ -1,0 +1,42 @@
+Presence = {
+    /**
+     * @summary insert a presence message when
+     * loggin in or out
+     * @param  {string} user_id
+     * @param  {string} color [Hexa Code]
+     * @param  {string} text
+     */
+    insertPresenceMessage(user_id, color, text) {
+        let message = new Message();
+        message.set({
+            user_id,
+            message: text,
+            type: 'status',
+            color
+        });
+        message.validate() && message.save();
+
+    }
+}
+
+Meteor.startup(function() {
+
+    if (Meteor.isClient) {
+        Hooks.init({
+            treatCloseAsLogout: true
+        });
+    }
+
+    if (Meteor.isServer) {
+        Hooks.onLoggedIn = (user_id) => {
+            Meteor.users.update(user_id, {$set: {'profile.connection': 'online'}});
+            Presence.insertPresenceMessage(user_id, '#2ecc71', 'is now online');
+        }
+
+        Hooks.onLoggedOut = (user_id) => {
+            Meteor.users.update(user_id, {$set: {'profile.connection': 'offline'}});
+            Presence.insertPresenceMessage(user_id, '#e74c3c', 'is now offline');
+        }
+    }
+
+});

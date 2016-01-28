@@ -8,6 +8,9 @@
                     <i class="circle middle aligned icon" style="color: {{profile.color}}"></i>
                     <div class="content" style="color: white;">
                         {{profile.username}}
+                        {{#if profile.status}}
+                            ({{profile.status}})
+                        {{/if}}
                     </div>
                 </div>
             {{/each}}
@@ -22,6 +25,9 @@
                 <i class="circle middle aligned icon" style="color: {{profile.color}}"></i>
                 <div class="content" style="color: white;">
                     {{profile.username}}
+                    {{#if profile.status}}
+                        ({{profile.status}})
+                    {{/if}}
                 </div>
             </div>
             {{/each}}

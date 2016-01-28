@@ -5,7 +5,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand(message) {
-        const reg = /^\/(nick|color|me)\s/;
+        const reg = /^\/(nick|color|me|status)\b/;
         return reg.test(message);
     },
     /**
@@ -15,26 +15,34 @@ let command = {
      */
     executeCommand(command) {
         // for the nick command
-        const nickRegEx = /^\/nick\s/;
+        const nickRegEx = /^\/nick\b/;
         if(nickRegEx.test(command)) {
             const nick = command.substring(command.indexOf(' ')+1);
             Meteor.users.update(Meteor.userId() , {$set: {'profile.username': nick}});
             return;
         }
         // for the color command
-        const colorRegEx = /^\/color\s/;
+        const colorRegEx = /^\/color\b/;
         if(colorRegEx.test(command)) {
             const color = command.substring(command.indexOf(' ')+1);
             Meteor.users.update(Meteor.userId() , {$set: {'profile.color': color}});
             return;
         }
         // for the /me command
-        const meRegEx = /^\/me\s/;
+        const meRegEx = /^\/me\b/;
         if(meRegEx.test(command)) {
             let message = new Message();
             const text = command.substring(command.indexOf(' ')+1);
             message.set({ user_id: Meteor.userId(), message: text, type: 'info' });
             message.validate() && Meteor.call('message.insert', message, (err) => { if(err)console.log(err); } );
+            return;
+        }
+        // for the /status command
+        const statusRegEx = /^\/status\b/;
+        if(statusRegEx.test(command)) {
+            let text = '';
+            if(command.indexOf(' ') > -1) text = command.substring(command.indexOf(' ')+1);
+            Meteor.users.update(Meteor.userId(), {$set: {'profile.status': text}});
             return;
         }
     }
