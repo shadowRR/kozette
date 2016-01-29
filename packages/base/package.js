@@ -29,6 +29,9 @@ Package.onUse(function(api) {
     api.imply(packages);
 
     api.addFiles('lib/modules/kozette.public.init.js', ['client', 'server']);
+    api.addFiles('lib/external/linkify.min.js', 'client');
+    api.addFiles('lib/external/linkify-html.min.js', 'client');
+    api.addFiles('lib/external/linkify-jquery.min.js', 'client');
 
     api.export(['Kozette']);
 });

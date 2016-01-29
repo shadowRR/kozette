@@ -3,7 +3,7 @@
     {{#let user=user}}
         <div class="ui inverted segment" style="border-left: 3px solid {{user.profile.color}}">
             <span style="color: {{user.profile.color}}">{{user.profile.username}}</span>
-            <em style="font-size: .8em;color: #dedede;">({{time}})</em> {{message}}
+            <em style="font-size: .8em;color: #dedede;">({{time}})</em> {{{parseMessage}}}
         </div>
     {{/let}}
 
