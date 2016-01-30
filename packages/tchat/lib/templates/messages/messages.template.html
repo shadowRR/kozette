@@ -1,18 +1,18 @@
 <template name="messages">
 
-    {{#if pinned}}
+    <div class="ui equal width grid" style="height: calc(100vh - 80px);margin-bottom: 10px;">
 
-        <div class="ui grid">
+        <div class="column">
+            <div class="message list">
 
-            <div class="thirteen wide column">
-                <div class="message list">
+                {{#each messages}}
+                    {{> Template.dynamic template=type}}
+                {{/each}}
 
-                    {{#each messages}}
-                        {{> Template.dynamic template=type}}
-                    {{/each}}
-
-                </div>
             </div>
+        </div>
+
+        {{#if pinned}}
 
             <div class="three wide column">
                 <div class="ui blue pointing below basic label">Pinned Messages</div>
@@ -21,18 +21,8 @@
                 {{/each}}
             </div>
 
-        </div>
+        {{/if}}
 
-    {{else}}
-
-        <div class="message list">
-
-            {{#each messages}}
-                {{> Template.dynamic template=type}}
-            {{/each}}
-
-        </div>
-
-    {{/if}}
+    </div>
 
 </template>
