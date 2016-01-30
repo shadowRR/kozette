@@ -5,7 +5,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand(message) {
-        const reg = /^\/(nick|color|me|status)\b/;
+        const reg = /^\/(nick|color|me|status|pin)\b/;
         return reg.test(message);
     },
     /**
@@ -43,6 +43,20 @@ let command = {
             let text = '';
             if(command.indexOf(' ') > -1) text = command.substring(command.indexOf(' ')+1);
             Meteor.users.update(Meteor.userId(), {$set: {'profile.status': text}});
+            return;
+        }
+        // for the /pin command
+        const pinRegEx = /^\/pin\b/;
+        if(pinRegEx.test(command)) {
+            let text = command.substring(command.indexOf(' ')+1);
+            // base message
+            let message = new Message();
+            message.set({ user_id: Meteor.userId(), message: text, type: 'basic' });
+            message.validate() && Meteor.call('message.insert', message, (err) => { if(err)console.log(err); });
+            // pinned message
+            let message_pinned = new MessagePinned();
+            message_pinned.set({ user_id: Meteor.userId(), message: text });
+            message_pinned.validate() && Meteor.call('message.pinned.insert', message_pinned, (err) => { if(err)console.log(err); });
             return;
         }
     }

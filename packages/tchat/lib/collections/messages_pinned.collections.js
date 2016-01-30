@@ -1,10 +1,10 @@
-/* MESSAGES */
+/* MESSAGES PINNED */
 
-Messages = new Mongo.Collection('messages');
+MessagesPinned = new Mongo.Collection('messages_pinned');
 
-Message = Astro.Class({
-    name: 'Message',
-    collection: Messages,
+MessagePinned = Astro.Class({
+    name: 'MessagePinned',
+    collection: MessagesPinned,
     fields: {
         user_id: {
             type: 'string',
@@ -22,20 +22,6 @@ Message = Astro.Class({
                 Validators.string(),
                 Validators.minLength(0)
             ]
-        },
-        type: {
-            type: 'string',
-            immutable: true,
-            validator: [
-                Validators.required(),
-                Validators.string(),
-                Validators.choice(['basic', 'info', 'status'])
-            ]
-        },
-        color: {
-            type: 'string',
-            immutable: true,
-            optional: true
         }
     },
     behaviors: {
@@ -45,19 +31,9 @@ Message = Astro.Class({
         }
     },
     indexes: {
-        user: {
-            fields: {
-                user_id: 1
-            }
-        },
         creation: {
             fields: {
                 created_at: -1
-            }
-        },
-        pinned: {
-            fields: {
-                pinned: 1
             }
         }
     }

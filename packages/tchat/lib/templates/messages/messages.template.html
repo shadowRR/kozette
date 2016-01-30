@@ -1,11 +1,38 @@
 <template name="messages">
 
-    <div class="message list">
+    {{#if pinned}}
 
-        {{#each messages}}
-            {{> Template.dynamic template=type}}
-        {{/each}}
+        <div class="ui grid">
 
-    </div>
+            <div class="thirteen wide column">
+                <div class="message list">
+
+                    {{#each messages}}
+                        {{> Template.dynamic template=type}}
+                    {{/each}}
+
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <div class="ui blue pointing below basic label">Pinned Messages</div>
+                {{#each pinnedMessages}}
+                    {{> message_pinned}}
+                {{/each}}
+            </div>
+
+        </div>
+
+    {{else}}
+
+        <div class="message list">
+
+            {{#each messages}}
+                {{> Template.dynamic template=type}}
+            {{/each}}
+
+        </div>
+
+    {{/if}}
 
 </template>

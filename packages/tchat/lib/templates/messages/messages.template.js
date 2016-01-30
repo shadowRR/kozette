@@ -3,6 +3,14 @@
 /* --- helpers --- */
 Template.messages.helpers({
     /**
+     * @summary check if pinned messages
+     * are available
+     * @return {boolean}
+     */
+    pinned() {
+        return MessagesPinned.find().count() > 0;
+    },
+    /**
      * @summary get list of messages
      * @return {cursor}
      */
@@ -21,6 +29,14 @@ Template.messages.helpers({
         return query;
     },
     /**
+     * @summary return list of pinned
+     * messages
+     * @return {cursor}
+     */
+    pinnedMessages() {
+        return MessagesPinned.find({}, {sort: {created_at: 1}});
+    },
+    /**
      * @summary get the type of message
      * to select the proper template
      * @return {string}
@@ -36,5 +52,6 @@ Template.messages.onCreated(function() {
 
     self.autorun(function() {
         self.subscribe('messages.list');
+        self.subscribe('messages.pinned.list');
     });
 });

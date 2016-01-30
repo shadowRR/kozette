@@ -11,6 +11,14 @@ Meteor.publish("messages.list", function() {
     }
 });
 
+// publish the list of message to a connected
+// user only with pinned true
+Meteor.publish("messages.pinned.list", function() {
+    if (this.userId) {
+        return MessagesPinned.find();
+    }
+});
+
 // publish the list of users to a connected
 // user - the list contains logged in and
 // logged out users

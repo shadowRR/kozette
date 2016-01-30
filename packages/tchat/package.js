@@ -11,9 +11,11 @@ Package.onUse(function(api) {
   api.use('kozette:command');
 
   api.addFiles('lib/collections/messages.collections.js', ['client', 'server']);
+  api.addFiles('lib/collections/messages_pinned.collections.js', ['client', 'server']);
 
   api.addFiles('lib/publications/tchat.publications.js', 'server');
   api.addFiles('lib/collections/messages.collections.methods.js', 'server');
+  api.addFiles('lib/collections/messages_pinned.collections.methods.js', 'server');
 
   api.addFiles('lib/templates/main.html', 'client');
   api.addFiles('lib/styles/styles.css', 'client');
@@ -25,10 +27,13 @@ Package.onUse(function(api) {
   api.addFiles('lib/templates/messages/type/message_info.js', 'client');
   api.addFiles('lib/templates/messages/type/message_status.html', 'client');
   api.addFiles('lib/templates/messages/type/message_status.js', 'client');
+  api.addFiles('lib/templates/messages/type/message_pinned.html', 'client');
+  api.addFiles('lib/templates/messages/type/message_pinned.js', 'client');
   api.addFiles('lib/templates/send/send.template.html', 'client');
   api.addFiles('lib/templates/send/send.template.js', 'client');
   api.addFiles('lib/templates/users/users.template.html', 'client');
   api.addFiles('lib/templates/users/users.template.js', 'client');
+  api.addFiles('lib/templates/menu/menu.template.html', 'client');
   api.addFiles('lib/external/buzz.min.js', 'client');
 
   api.addAssets('sound/notify.mp3', 'client');
@@ -37,6 +42,7 @@ Package.onUse(function(api) {
   api.addAssets('sound/kozette.wav', 'client');
 
   api.export(['Messages', 'Message'], ['client', 'server']);
+  api.export(['MessagesPinned', 'MessagePinned'], ['client', 'server']);
 });
 
 Package.onTest(function(api) {

@@ -6,7 +6,6 @@ Meteor.methods({
         message.set({ user_id, created_at: new Date() });
         if(message.validate()){
             message.save();
-            return;
         }
         return;
     }
