@@ -34,12 +34,9 @@ Package.onUse(function(api) {
   api.addFiles('lib/templates/users/users.template.html', 'client');
   api.addFiles('lib/templates/users/users.template.js', 'client');
   api.addFiles('lib/templates/menu/menu.template.html', 'client');
+  api.addFiles('lib/templates/help/help.template.html', 'client');
+  api.addFiles('lib/templates/help/help.template.js', 'client');
   api.addFiles('lib/external/buzz.min.js', 'client');
-
-  api.addAssets('sound/notify.mp3', 'client');
-  api.addAssets('sound/notify.ogg', 'client');
-  api.addAssets('sound/notify.wav', 'client');
-  api.addAssets('sound/kozette.wav', 'client');
 
   api.export(['Messages', 'Message'], ['client', 'server']);
   api.export(['MessagesPinned', 'MessagePinned'], ['client', 'server']);

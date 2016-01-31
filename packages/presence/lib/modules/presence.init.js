@@ -21,13 +21,29 @@ Presence = {
 
 Meteor.startup(function() {
 
+    // on client, init the hooks then
+    // trigger sounds on users logging in
+    // or out
     if (Meteor.isClient) {
         Hooks.init({
             treatCloseAsLogout: true
         });
+
+        Hooks.onLoggedIn = (user_id) => {
+            let sound = new buzz.sound('/kozette_connection.wav');
+            sound.play();
+        }
+
+        Hooks.onLoggedOut = (user_id) => {
+            let sound = new buzz.sound('/kozette_disconnection.wav');
+            sound.play();
+        }
     }
 
+    // on the server, insert a special message
+    // to show users logging in or out
     if (Meteor.isServer) {
+
         Hooks.onLoggedIn = (user_id) => {
             Meteor.users.update(user_id, {$set: {'profile.connection': 'online'}});
             Presence.insertPresenceMessage(user_id, '#2ecc71', 'is now online');

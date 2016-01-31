@@ -17,13 +17,15 @@ Template.messages.helpers({
     messages() {
         // prepare the sound to trigger
         // when receiving a new message
-        let sound = new buzz.sound('packages/kozette_tchat/sound/kozette.wav');
+        let sound = new buzz.sound('/kozette_message.wav');
         let query = Messages.find({}, {sort: {created_at: 1}});
         query.observeChanges({
             added(id, doc) {
                 // if new message not from the connected
-                // user, trigger the new message sound
-                if(Meteor.userId() != doc.user_id)sound.play();
+                // user and of type 'basic',
+                //  trigger the new message sound
+                if(Meteor.userId() != doc.user_id && doc.type === 'basic')
+                    sound.play();
             }
         })
         return query;

@@ -5,7 +5,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand(message) {
-        const reg = /^\/(nick|color|me|status|pin)\b/;
+        const reg = /^\/(nick|color|me|status|pin|help)\b/;
         return reg.test(message);
     },
     /**
@@ -57,6 +57,12 @@ let command = {
             let message_pinned = new MessagePinned();
             message_pinned.set({ user_id: Meteor.userId(), message: text });
             message_pinned.validate() && Meteor.call('message.pinned.insert', message_pinned, (err) => { if(err)console.log(err); });
+            return;
+        }
+        // for the help command
+        const helpRegEx = /^\/help\b/;
+        if(helpRegEx.test(command)) {
+            $('.ui.modal.help').modal('show');
             return;
         }
     }
