@@ -29,7 +29,7 @@ Template.send.events({
             let message = new Message();
             message.set({
                 user_id: Meteor.userId(),
-                message: text,
+                message: linkifyHtml(text),
                 type: 'basic'
             });
             if(message.validate()) {

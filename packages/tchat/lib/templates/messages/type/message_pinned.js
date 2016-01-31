@@ -22,13 +22,6 @@ Template.message_pinned.helpers({
      */
     owner() {
         return this.user_id === Meteor.userId();
-    },
-    /**
-     * @summary parse message for links
-     * @return {string}
-     */
-    parseMessage() {
-        return linkifyHtml(this.message);
     }
 });
 

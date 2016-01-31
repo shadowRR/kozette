@@ -22,7 +22,8 @@ Package.onUse(function(api) {
         'jagi:astronomy-validators',
         'jagi:astronomy-timestamp-behavior',
         'semantic:ui@2.1.7',
-        'flemay:less-autoprefixer'
+        'flemay:less-autoprefixer',
+        'djedi:sanitize-html'
     ];
 
     api.use(packages);

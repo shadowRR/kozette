@@ -15,12 +15,5 @@ Template.message_basic.helpers({
      */
     user() {
         return Meteor.users.findOne(this.user_id);
-    },
-    /**
-     * @summary parse message for links
-     * @return {string}
-     */
-    parseMessage() {
-        return linkifyHtml(this.message);
     }
 });

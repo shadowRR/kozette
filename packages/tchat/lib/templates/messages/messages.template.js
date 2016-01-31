@@ -19,8 +19,8 @@ Template.messages.helpers({
         // when receiving a new message
         let sound = new buzz.sound('/kozette_message.wav');
         let query = Messages.find({}, {sort: {created_at: 1}});
-        query.observeChanges({
-            added(id, doc) {
+        query.observe({
+            added(doc) {
                 // if new message not from the connected
                 // user and of type 'basic',
                 //  trigger the new message sound

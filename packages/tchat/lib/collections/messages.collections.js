@@ -36,6 +36,10 @@ Message = Astro.Class({
             type: 'string',
             immutable: true,
             optional: true
+        },
+        embed: {
+            type: 'array',
+            optional: true
         }
     },
     behaviors: {
