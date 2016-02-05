@@ -17,7 +17,7 @@ Template.messages.helpers({
     messages() {
         // prepare the sound to trigger
         // when receiving a new message
-        let sound = new buzz.sound('/kozette_message.wav');
+        let sound = new buzz.sound('/kozette_message.mp3');
         let query = Messages.find({}, {sort: {created_at: 1}});
         query.observe({
             added(doc) {
@@ -25,7 +25,9 @@ Template.messages.helpers({
                 // user and of type 'basic',
                 //  trigger the new message sound
                 if(Meteor.userId() != doc.user_id && doc.type === 'basic')
-                    sound.play();
+                    // if mute mode isn't active
+                    if(!Session.get('mute'))
+                        sound.play();
             }
         })
         return query;

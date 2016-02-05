@@ -5,7 +5,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand(message) {
-        const reg = /^\/(nick|color|me|status|pin|help)\b/;
+        const reg = /^\/(nick|color|me|status|pin|help|mute)\b/;
         return reg.test(message);
     },
     /**
@@ -64,6 +64,19 @@ let command = {
         if(helpRegEx.test(command)) {
             $('.ui.modal.help').modal('show');
             return;
+        }
+        // for the mute/unmute command
+        const muteRegEx = /^\/mute\b/;
+        if(muteRegEx.test(command)) {
+            const mute_value = Session.get('mute');
+            Session.set('mute', !mute_value);
+            // check if duration was specified
+            const duration = +command.substring(command.indexOf(' ')+1);
+            if(duration && _.isNumber(duration)){
+                Meteor.setTimeout(function(mute_value) {
+                    Session.set('mute', mute_value);
+                }, 1000 * 60 * duration);
+            }
         }
     }
 }

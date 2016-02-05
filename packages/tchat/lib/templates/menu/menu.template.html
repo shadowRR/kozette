@@ -1,10 +1,10 @@
 <template name="menu">
 
-    <div class="ui small basic icon fluid buttons">
-      <button class="ui button"><i class="file icon"></i></button>
-      <button class="ui button"><i class="save icon"></i></button>
-      <button class="ui button"><i class="upload icon"></i></button>
-      <button class="ui button"><i class="download icon"></i></button>
-    </div>
+    {{#if isMuted}}
+        <div class="ui basic red label">
+            <i class="mute icon"></i>
+            Mute Mode
+        </div>
+    {{/if}}
 
 </template>

@@ -30,12 +30,12 @@ Meteor.startup(function() {
         });
 
         Hooks.onLoggedIn = (user_id) => {
-            let sound = new buzz.sound('/kozette_connection.wav');
+            let sound = new buzz.sound('/kozette_connection.mp3');
             sound.play();
         }
 
         Hooks.onLoggedOut = (user_id) => {
-            let sound = new buzz.sound('/kozette_disconnection.wav');
+            let sound = new buzz.sound('/kozette_disconnection.mp3');
             sound.play();
         }
     }
