@@ -1,1 +1,0 @@
-Kozette.public.command = {};

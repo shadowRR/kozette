@@ -1,0 +1,18 @@
+<template name="tchat">
+
+    <div id="tchat">
+        <div id="message-list">
+            {{#each messages}}
+
+                <div id="message">
+                    {{#with user}}<span style="color: {{profile.color}}">{{username}}</span>{{/with}}
+                    <span class="message-date">[{{getDate created_at}}]</span>
+                    {{message}}
+                </div>
+
+            {{/each}}
+        </div>
+        {{> message_input}}
+    </div>
+
+</template>

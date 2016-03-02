@@ -1,0 +1,2 @@
+Kozette = {};
+Kozette.public = {};

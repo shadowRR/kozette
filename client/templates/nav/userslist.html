@@ -1,0 +1,10 @@
+<template name="userslist">
+
+    <span class="oneliner">// Users -----------------------------------------------------------</span>
+    {{#each users}}
+        <div id="user" style="color: {{profile.color}}">
+            {{username}}
+        </div>
+    {{/each}}
+
+</template>

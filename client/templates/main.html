@@ -1,0 +1,26 @@
+<head>
+    <title>Kozette</title>
+</head>
+
+<body>
+
+{{> main}}
+
+</body>
+
+<template name="main">
+
+    {{#if authenticated}}
+
+        <section id="app">
+            <div id="content">{{> tchat}}</div>
+            <div id="nav">{{> nav}}</div>
+        </section>
+
+    {{else}}
+
+        {{> login}}
+
+    {{/if}}
+
+</template>
