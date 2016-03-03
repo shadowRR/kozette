@@ -32,11 +32,10 @@ Template.tchat.helpers( {
     },
     /**
      *
-     * @param date
-     * @returns {*|2217}
+     * @returns {*}
      */
-    getDate( date ) {
-        return moment( date ).format( 'DD/MM/YYYY - HH:mm' );
+    type() {
+        return `message_${this.type}`;
     }
 } );
 

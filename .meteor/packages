@@ -24,3 +24,4 @@ momentjs:moment
 accounts-password
 ls3271:meteor-linkify
 differential:event-hooks
+mizzao:timesync

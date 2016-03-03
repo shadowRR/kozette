@@ -3,7 +3,7 @@
 Meteor.publish("messages.list", function() {
     if (this.userId) {
         return Messages.find({}, {
-            limit: 20,
+            limit: 50,
             sort: {
                 created_at: -1
             }

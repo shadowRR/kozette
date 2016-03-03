@@ -3,7 +3,7 @@
     <span class="oneliner">// Users -----------------------------------------------------------</span>
     {{#each users}}
         <div id="user" style="color: {{profile.color}}">
-            {{username}}
+            {{username}} {{#if profile.status}}({{profile.status}}){{/if}}
         </div>
     {{/each}}
 

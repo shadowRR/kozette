@@ -2,7 +2,7 @@
 
 Template.userslist.helpers({
     users() {
-        return Meteor.users.find();
+        return Meteor.users.find({'profile.connection': 'online'});
     }
 });
 

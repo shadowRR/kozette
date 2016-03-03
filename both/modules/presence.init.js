@@ -46,12 +46,12 @@ Meteor.startup(function() {
 
         Hooks.onLoggedIn = (user_id) => {
             Meteor.users.update(user_id, {$set: {'profile.connection': 'online'}});
-            Presence.insertPresenceMessage(user_id, '#2ecc71', 'is now online');
+            Presence.insertPresenceMessage(user_id, '#2ecc71', 'is online. And nobody cares.');
         }
 
         Hooks.onLoggedOut = (user_id) => {
             Meteor.users.update(user_id, {$set: {'profile.connection': 'offline'}});
-            Presence.insertPresenceMessage(user_id, '#e74c3c', 'is now offline');
+            Presence.insertPresenceMessage(user_id, '#e74c3c', 'has left. Like a bitch.');
         }
     }
 
