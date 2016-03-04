@@ -3,35 +3,26 @@
 Meteor.methods( {
     /**
      * @summary insert a basic message
-     * @param {string} message
+     * @param {object} message
      */
     'message.insert' ( message ) {
-        const user_id = Meteor.userId();
-        let clean;
-        // Allow only a super restricted set of tags and attributes
-        if ( Meteor.isServer ) {
-            clean = sanitizeHtml( message.message, {
-                allowedTags: [ 'a' ],
-                allowedAttributes: {
-                    'a': [ 'href', 'target' ]
-                },
-                transformTags: {
-                    'a': sanitizeHtml.simpleTransform( 'a', {
-                        target: '_blank'
-                    } ),
-                }
-            } );
-            message.set( { created_at: new Date() } );
-        } else {
-            message.set( { created_at: new Date(Date.now() + TimeSync.serverOffset()) } );
-        }
 
-        message.set( {
-            user_id, message: clean || message.message
-        } );
-        if ( message.validate() ) {
-            message.save();
-        }
+        if ( !Meteor.user() )
+            throw new Meteor.Error( 'UserNotFound', 'No user connected' );
+
+        const user_id = Meteor.userId();
+        // get the proper time, with server offset if needed
+        // prevent message to be saved the first time client side
+        // with the wrong time
+        Meteor.isServer ?
+            message.set( { created_at: new Date() } ) :
+            message.set( { created_at: new Date( Date.now() + TimeSync.serverOffset() ) } );
+
+        message.set( { user_id, message: message.message } );
+        if ( !message.validate() )
+            throw new Meteor.Error( 'ValidationFailed', 'Message validation has failed' );
+
+        message.save();
         return;
     }
 } );

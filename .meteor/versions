@@ -21,7 +21,6 @@ ddp-server@1.2.2
 deps@1.0.9
 diff-sequence@1.0.1
 differential:event-hooks@1.5.0
-djedi:sanitize-html@1.3.0
 ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
@@ -43,7 +42,6 @@ launch-screen@1.0.4
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
-ls3271:meteor-linkify@0.0.5
 meteor@1.1.10
 meteor-base@1.0.1
 minifiers@1.1.7

@@ -19,9 +19,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 jagi:astronomy
 jagi:astronomy-validators
 jagi:astronomy-timestamp-behavior
-djedi:sanitize-html
 momentjs:moment
 accounts-password
-ls3271:meteor-linkify
 differential:event-hooks
 mizzao:timesync

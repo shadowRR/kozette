@@ -12,7 +12,7 @@ Template.message_input.events( {
                 let message = new Message();
                 message.set( {
                     user_id: Meteor.userId(),
-                    message: linkifyHtml( text ),
+                    message: text,
                     type: 'basic'
                 } );
                 if ( message.validate() ) {
