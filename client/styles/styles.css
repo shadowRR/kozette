@@ -22,6 +22,11 @@ input {
 
 p {
 	word-wrap: break-word;
+	margin: 0;
+}
+
+a {
+	color: white;
 }
 
 #react-root {
