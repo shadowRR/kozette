@@ -8,7 +8,7 @@ Template.main.helpers( {
 
 Template.app.onRendered( function () {
     Split( [ '#content', '#sidebar' ], {
-        sizes: [ 75, 25 ],
+        sizes: [ 85, 15 ],
         minSize: [ 400, 200 ],
         gutterSize: 8,
         cursor: 'col-resize'
