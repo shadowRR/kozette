@@ -20,9 +20,7 @@ Template.pinned_message.helpers( {
      * @return {object}
      */
     user() {
-        var t = Meteor.users.findOne( this.user_id );
-        console.log( t );
-        return t;
+        return Meteor.users.findOne( this.user_id );
     },
     /**
      * @summary check if pinned message owner

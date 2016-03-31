@@ -94,6 +94,12 @@ a {
 	display: flex;
 }
 
+.message-pinned {
+	color: white;
+	padding-top: 10px;
+	display: flex;
+}
+
 .message-date {
 	color: #5f5f5f;
 	/*width: 160px;
