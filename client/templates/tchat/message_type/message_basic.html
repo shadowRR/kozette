@@ -1,16 +1,10 @@
 <template name="message_basic">
 
-<<<<<<< HEAD
-    <div class="message-div">
-        <span class="message-date">[{{getDate created_at}}]</span>
-        {{#with getUser user_id}}<span style="color: {{profile.color}}" class="username">{{username}}</span>{{/with}}
-        <span class="message">{{#markdown}}{{message}}{{/markdown}}</span>
-=======
     <div class="message-item">
         <span class="message-date">[{{getTime created_at}}]</span>
-          {{#with getUser user_id}}<span style="color: {{profile.color}}" class="username">&lt;{{username}}&gt;</span>{{/with}}
-          <span class="message-content">{{#markdown}}{{message}}{{/markdown}}</span>
->>>>>>> 72ff8f380b11b970792a4dd458aa2a644613252f
+        {{#with getUser user_id}}<span style="color: {{profile.color}}" class="username">&lt;{{username}}
+            &gt;</span>{{/with}}
+        <span class="message-content">{{#markdown}}{{message}}{{/markdown}}</span>
     </div>
 
 </template>

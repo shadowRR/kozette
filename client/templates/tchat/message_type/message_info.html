@@ -1,14 +1,10 @@
 <template name="message_info">
 
-<<<<<<< HEAD
-    <div class="message-div">
-        <span class="message-date">[{{getDate created_at}}]</span>
-        {{#with getUser user_id}}<span style="color: {{profile.color}}">{{username}} {{../message}}</span>{{/with}}
-=======
     <div class="message-item">
         <span class="message-date">[{{getTime created_at}}]</span>
-        {{#with getUser user_id}}<span class="message" style="font-weight: bold; color: {{profile.color}}">{{username}} {{../message}}</span>{{/with}}
->>>>>>> 72ff8f380b11b970792a4dd458aa2a644613252f
+        {{#with getUser user_id}}
+            <span class="message" style="font-weight: bold; color: {{profile.color}}">{{username}} {{../message}}</span>
+        {{/with}}
     </div>
 
 </template>
