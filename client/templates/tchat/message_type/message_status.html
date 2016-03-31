@@ -1,7 +1,7 @@
 <template name="message_status">
 
-    <div id="message">
-        <span class="message-date">[{{getDate created_at}}]</span>
+    <div class="message-item">
+        <span class="message-date">[{{getTime created_at}}]</span>
         {{#with getUser user_id}}<p class="message message-status">*** The useless garbage known as {{username}} {{../message}} ***</p>{{/with}}
     </div>
 
