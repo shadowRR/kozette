@@ -88,7 +88,11 @@ a {
 	flex: 1;
 }
 
+<<<<<<< HEAD
 .message-div {
+=======
+.message-item {
+>>>>>>> 72ff8f380b11b970792a4dd458aa2a644613252f
 	color: white;
 	padding-top: 10px;
 	display: flex;
@@ -96,12 +100,13 @@ a {
 
 .message-date {
 	color: #5f5f5f;
-	width: 160px;
-	min-width: 160px;
+	/*width: 160px;
+	min-width: 160px;*/
 }
 
 .username {
 	min-width: 30px;
+  margin: 0 10px;
 }
 
 .message {
@@ -112,6 +117,7 @@ a {
 
 .message-status {
 	font-style: italic;
+  color: #5f5f5f;
 }
 
 .inputs {
@@ -190,4 +196,8 @@ button:hover, a:hover {
 .split.split-horizontal, .gutter.gutter-horizontal {
 	height: 100%;
 	float: left;
+}
+
+.no-margin {
+  margin: 0 !important;
 }

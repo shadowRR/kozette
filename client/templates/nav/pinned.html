@@ -1,0 +1,10 @@
+<template name="pinned">
+  <div class="oneliner no-margin">// Pinned Messages -----------------------------------------------------------</div>
+    <!--{{#if messages.length > 0}}-->
+    <div id="message-list">
+        {{#each messages}}
+            {{> pinned_message}}
+        {{/each}}
+    </div>
+    <!--{{/if}}-->
+</template>
