@@ -16,15 +16,24 @@
 
     {{#if authenticated}}
 
-        <section id="app">
-            <div id="content">{{> tchat}}</div>
-            <div id="nav">{{> nav}}</div>
-        </section>
+        {{> app}}
 
     {{else}}
 
         {{> login}}
 
     {{/if}}
+
+</template>
+
+<template name="app">
+
+    <div id="content" class="split split-horizontal">
+        {{> tchat}}
+    </div>
+    <div id="sidebar" class="split split-horizontal">
+        <div id="nav" class="split content">{{> nav}}</div>
+        <div id="pinned" class="split content"></div>
+    </div>
 
 </template>
