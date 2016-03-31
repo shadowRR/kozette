@@ -88,11 +88,7 @@ a {
 	flex: 1;
 }
 
-<<<<<<< HEAD
-.message-div {
-=======
 .message-item {
->>>>>>> 72ff8f380b11b970792a4dd458aa2a644613252f
 	color: white;
 	padding-top: 10px;
 	display: flex;
