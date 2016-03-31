@@ -1,6 +1,6 @@
 <template name="message_basic">
 
-    <div id="message">
+    <div class="message-div">
         <span class="message-date">[{{getDate created_at}}]</span>
         {{#with getUser user_id}}<span style="color: {{profile.color}}" class="username">{{username}}</span>{{/with}}
         <span class="message">{{#markdown}}{{message}}{{/markdown}}</span>

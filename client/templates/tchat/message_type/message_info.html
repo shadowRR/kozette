@@ -1,6 +1,6 @@
 <template name="message_info">
 
-    <div id="message">
+    <div class="message-div">
         <span class="message-date">[{{getDate created_at}}]</span>
         {{#with getUser user_id}}<span style="color: {{profile.color}}">{{username}} {{../message}}</span>{{/with}}
     </div>
