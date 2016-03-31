@@ -4,14 +4,15 @@
         <div>
             <div>
                 <span class="message-date">[{{getDateFromNow created_at}}]</span>
-              <span>
-                <a class="blue-link remove-pinned">[ X ]</a>
-              </span>
+                {{#if owner}}
+                    <span>
+                      <a class="blue-link remove-pinned">[ X ]</a>
+                    </span>
+                {{/if}}
             </div>
             <div style="padding-top: 10px;">
-                {{#if owner}}
-                    <span style="color: {{_user.profile.color}}">&lt;{{_user.username}}&gt;</span> {{{parseMessage}}}
-                {{/if}}
+                    <span style="color: {{_user.profile.color}}">{{_user.username}} &gt;</span> {{{parseMessage}}}
+
             </div>
             <div class="oneliner">-----------------------------------------------------------</div>
 
