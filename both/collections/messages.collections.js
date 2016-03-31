@@ -1,8 +1,21 @@
-/* MESSAGES */
+/*
+ ███╗   ███╗███████╗███████╗███████╗ █████╗  ██████╗ ███████╗███████╗
+ ████╗ ████║██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝ ██╔════╝██╔════╝
+ ██╔████╔██║█████╗  ███████╗███████╗███████║██║  ███╗█████╗  ███████╗
+ ██║╚██╔╝██║██╔══╝  ╚════██║╚════██║██╔══██║██║   ██║██╔══╝  ╚════██║
+ ██║ ╚═╝ ██║███████╗███████║███████║██║  ██║╚██████╔╝███████╗███████║
+ ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝
+ ██████╗ ██████╗ ██╗     ██╗     ███████╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+ ██╔════╝██╔═══██╗██║     ██║     ██╔════╝██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+ ██║     ██║   ██║██║     ██║     █████╗  ██║        ██║   ██║██║   ██║██╔██╗ ██║
+ ██║     ██║   ██║██║     ██║     ██╔══╝  ██║        ██║   ██║██║   ██║██║╚██╗██║
+ ╚██████╗╚██████╔╝███████╗███████╗███████╗╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝╚══════╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+ */
 
-Messages = new Mongo.Collection('messages');
+Messages = new Mongo.Collection( 'messages' );
 
-Message = Astro.Class({
+Message = Astro.Class( {
     name: 'Message',
     collection: Messages,
     fields: {
@@ -20,7 +33,7 @@ Message = Astro.Class({
             validator: [
                 Validators.required(),
                 Validators.string(),
-                Validators.minLength(0)
+                Validators.minLength( 0 )
             ]
         },
         type: {
@@ -29,7 +42,7 @@ Message = Astro.Class({
             validator: [
                 Validators.required(),
                 Validators.string(),
-                Validators.choice(['basic', 'info', 'status'])
+                Validators.choice( [ 'basic', 'info', 'status' ] )
             ]
         },
         color: {
@@ -58,11 +71,6 @@ Message = Astro.Class({
             fields: {
                 created_at: -1
             }
-        },
-        pinned: {
-            fields: {
-                pinned: 1
-            }
         }
     }
-});
+} );

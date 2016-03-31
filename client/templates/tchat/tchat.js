@@ -1,5 +1,13 @@
-/**/
+/*
+ ████████╗ ██████╗██╗  ██╗ █████╗ ████████╗
+ ╚══██╔══╝██╔════╝██║  ██║██╔══██╗╚══██╔══╝
+ ██║   ██║     ███████║███████║   ██║
+ ██║   ██║     ██╔══██║██╔══██║   ██║
+ ██║   ╚██████╗██║  ██║██║  ██║   ██║
+ ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+ */
 
+/* --- helpers --- */
 Template.tchat.helpers( {
     /**
      * @summary get list of messages
@@ -24,14 +32,14 @@ Template.tchat.helpers( {
         return query;
     },
     /**
-     *
+     * @summary get a specified user
      * @returns {any}
      */
     user() {
         return Meteor.users.findOne( this.user_id );
     },
     /**
-     *
+     * @summary get message type for dynamic templates
      * @returns {*}
      */
     type() {

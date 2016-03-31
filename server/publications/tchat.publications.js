@@ -1,29 +1,44 @@
-// publish the list of message to a connected
-// user only
-Meteor.publish("messages.list", function() {
-    if (this.userId) {
-        return Messages.find({}, {
-            limit: 50,
-            sort: {
-                created_at: -1
-            }
-        });
-    }
-});
+/*
+ ████████╗ ██████╗██╗  ██╗ █████╗ ████████╗
+ ╚══██╔══╝██╔════╝██║  ██║██╔══██╗╚══██╔══╝
+ ██║   ██║     ███████║███████║   ██║
+ ██║   ██║     ██╔══██║██╔══██║   ██║
+ ██║   ╚██████╗██║  ██║██║  ██║   ██║
+ ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+ ██████╗ ██╗   ██╗██████╗ ██╗     ██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
+ ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+ ██████╔╝██║   ██║██████╔╝██║     ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗
+ ██╔═══╝ ██║   ██║██╔══██╗██║     ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║
+ ██║     ╚██████╔╝██████╔╝███████╗██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║
+ ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+ */
 
-// publish the list of message to a connected
-// user only with pinned true
-Meteor.publish("messages.pinned.list", function() {
-    if (this.userId) {
-        return MessagesPinned.find();
-    }
-});
+Meteor.publish( "messages.list", function () {
 
-// publish the list of users to a connected
-// user - the list contains logged in and
-// logged out users
-Meteor.publish("users.list", function(){
-    if(this.userId) {
-        return Meteor.users.find();
-    }
-});
+    if ( !this.userId )
+        throw new Meteor.Error( 'no-user-id', 'There is no user connected' );
+
+    const selector = {},
+        options = { limit: 50, sort: { created_at: -1 } };
+
+    return Messages.find( selector, options );
+
+} );
+
+Meteor.publish( "messages.pinned.list", function () {
+
+    if ( !this.userId )
+        throw new Meteor.Error( 'no-user-id', 'There is no user connected' );
+
+    return MessagesPinned.find();
+
+} );
+
+Meteor.publish( "users.list", function () {
+
+    if ( !this.userId )
+        throw new Meteor.Error( 'no-user-id', 'There is no user connected' );
+
+    return Meteor.users.find();
+
+} );
