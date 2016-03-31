@@ -68,7 +68,6 @@ let command = {
         // for the help command
         const helpRegEx = /^\/help\b/;
         if ( helpRegEx.test( command ) ) {
-            //$('.ui.modal.help').modal('show');
             return;
         }
         // for the mute/unmute command
