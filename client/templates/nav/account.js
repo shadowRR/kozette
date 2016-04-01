@@ -9,6 +9,10 @@
 
 /* --- events --- */
 Template.account.events( {
+    /**
+     * @summary logout the user
+     * @param e
+     */
     'click .red-link'( e ) {
         Meteor.logout();
     }

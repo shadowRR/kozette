@@ -76,12 +76,12 @@ let command = {
             const mute_value = Session.get( 'mute' );
             Session.set( 'mute', !mute_value );
             // check if duration was specified
-            const duration = +command.substring( command.indexOf( ' ' ) + 1 );
-            if ( duration && _.isNumber( duration ) ) {
-                Meteor.setTimeout( function ( mute_value ) {
-                    Session.set( 'mute', mute_value );
-                }, 1000 * 60 * duration );
-            }
+            // const duration = +command.substring( command.indexOf( ' ' ) + 1 );
+            // if ( duration && _.isNumber( duration ) ) {
+            //     Meteor.setTimeout( function ( mute_value ) {
+            //         Session.set( 'mute', mute_value );
+            //     }, 1000 * 60 * duration );
+            // }
         }
     }
 }
