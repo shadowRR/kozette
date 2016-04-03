@@ -8,14 +8,14 @@
  */
 
 /* --- helpers --- */
-Template.userslist.helpers({
+Template.web_userslist.helpers({
     users() {
         return Meteor.users.find({'profile.connection': 'online'});
     }
 });
 
 /* --- oncreated --- */
-Template.userslist.onCreated(function() {
+Template.web_userslist.onCreated(function() {
     let self = this
 
     self.autorun(() => {

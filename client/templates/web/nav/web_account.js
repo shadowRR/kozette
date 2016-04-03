@@ -8,7 +8,7 @@
  */
 
 /* --- events --- */
-Template.account.events( {
+Template.web_account.events( {
     /**
      * @summary logout the user
      * @param e

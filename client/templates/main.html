@@ -16,7 +16,11 @@
 
     {{#if authenticated}}
 
-        {{> app}}
+        {{#if isMobile}}
+            {{> mobile_app}}
+        {{else}}
+            {{> web_app}}
+        {{/if}}
 
     {{else}}
 
@@ -26,14 +30,21 @@
 
 </template>
 
-<template name="app">
+<template name="web_app">
 
     <div id="content" class="split split-horizontal">
         {{> tchat}}
     </div>
     <div id="sidebar" class="split split-horizontal">
-        <div id="nav" class="split content">{{> nav}}</div>
-        <div id="pinned" class="split content">{{> pinned}}</div>
+        <div id="nav" class="split content">{{> web_nav}}</div>
+        <div id="pinned" class="split content">{{> web_pinned}}</div>
     </div>
+
+</template>
+
+<template name="mobile_app">
+
+    {{> tchat}}
+    {{> mobile_userslist}}
 
 </template>

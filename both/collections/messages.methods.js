@@ -36,6 +36,16 @@ Meteor.methods( {
             throw new Meteor.Error( 'ValidationFailed', 'Message validation has failed' );
 
         message.save();
+
+        Push.debug = true;
+
+        Push.send({
+            from: 'push',
+            title: Meteor.user().username || 'Unknown',
+            text: message.message,
+            query: {}
+        });
+
         return;
     }
 } );

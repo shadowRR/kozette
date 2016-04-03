@@ -8,7 +8,7 @@
  */
 
 /* --- server --- */
-Template.server.helpers({
+Template.web_server.helpers({
     /**
      *
      * @returns {Boolean}

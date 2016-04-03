@@ -7,7 +7,7 @@
  ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  
  */
 
-Template.nav.helpers({
+Template.web_nav.helpers({
     /**
      * @summary get the actual mute value
      * @returns {String}

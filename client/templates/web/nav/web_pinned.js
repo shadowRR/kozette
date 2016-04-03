@@ -1,4 +1,4 @@
-Template.pinned.helpers({
+Template.web_pinned.helpers({
      /**
       * @summary humanize the time
       * @return {string}

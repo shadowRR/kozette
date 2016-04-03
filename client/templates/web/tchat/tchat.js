@@ -11,7 +11,7 @@
 Template.tchat.helpers( {
     /**
      * @summary get list of messages
-     * @return {cursor}
+     * @return {Mongo.Cursor}
      */
     messages() {
         // prepare the sound to trigger
@@ -23,10 +23,11 @@ Template.tchat.helpers( {
                 // if new message not from the connected
                 // user and of type 'basic',
                 //  trigger the new message sound
-                if ( Meteor.userId() != doc.user_id && doc.type === 'basic' )
-                // if mute mode isn't active
+                if ( Meteor.userId() != doc.user_id && doc.type === 'basic' ) {
+                    // if mute mode isn't active
                     if ( !Session.get( 'mute' ) )
                         sound.play();
+                }
             }
         } )
         return query;
