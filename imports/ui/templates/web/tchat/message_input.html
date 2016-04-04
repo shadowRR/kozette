@@ -1,6 +1,8 @@
 <template name="message_input">
 
-    <input type="text" class="input-message" name="message"
-           placeholder="write here, you bitch." autofocus/>
+    <input id="message-input" type="text" class="input-message" name="message"
+           placeholder="write here, you bitch." autofocus autocomplete="off"/>
+
+    {{initAutoComplete}}
 
 </template>

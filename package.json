@@ -16,6 +16,9 @@
   },
   "homepage": "https://github.com/shadowRR/kozette#readme",
   "dependencies": {
+    "at.js": "ichord/at.js#v1.5.0",
+    "jquery": "^2.2.2",
+    "jquery.caret": "^0.2.1",
     "meteor-node-stubs": "^0.2.1",
     "moment": "^2.12.0"
   }

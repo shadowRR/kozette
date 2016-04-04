@@ -203,3 +203,20 @@ button:hover, a:hover {
 .no-margin {
   margin: 0 !important;
 }
+
+.atwho-view {
+	background: #021E27;
+	color: white;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.atwho-view ul li {
+	border: none;
+}
+
+.atwho-view .cur {
+	background: #0096c1;
+	border: none;
+}

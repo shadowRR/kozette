@@ -1,5 +1,3 @@
-/**/
-
 // STARTUP
 import '../imports/startup/presence.init';
 

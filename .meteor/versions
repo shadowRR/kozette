@@ -70,6 +70,8 @@ reactive-dict@1.1.5
 reactive-var@1.0.7
 reload@1.1.6
 retry@1.0.5
+risul:autocomplete@1.4.1
+risul:caret@0.2.2
 routepolicy@1.0.8
 service-configuration@1.0.7
 session@1.1.3
