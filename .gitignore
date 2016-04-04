@@ -1,9 +1,6 @@
 .meteor/local
-.meteor/meteorite
 settings.json
 .idea
-kozette.tar.gz
 mup.json
-build
-kozette.keystore
 config.push.json
+node_modules

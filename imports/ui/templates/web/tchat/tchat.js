@@ -27,7 +27,7 @@ Template.tchat.helpers( {
     messages() {
         // prepare the sound to trigger
         // when receiving a new message
-        let sound = new Audio( '/kozette_message.mp3' );
+        let sound = new Audio( 'sounds/kozette_message.mp3' );
         let query = Messages.find( {}, { sort: { created_at: 1 } } );
         query.observe( {
             added( doc ) {
