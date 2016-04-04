@@ -1,0 +1,22 @@
+{
+  "name": "kozette",
+  "version": "0.0.1",
+  "description": "Kozette is a simple T'Chat built with Meteor.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shadowRR/kozette.git"
+  },
+  "author": "shad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shadowRR/kozette/issues"
+  },
+  "homepage": "https://github.com/shadowRR/kozette#readme",
+  "dependencies": {
+    "meteor-node-stubs": "^0.2.1",
+    "moment": "^2.12.0"
+  }
+}
