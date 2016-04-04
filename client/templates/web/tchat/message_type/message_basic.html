@@ -3,7 +3,7 @@
     <div class="message-item">
         <span class="message-date">[{{getTime created_at}}]</span>
         {{#with getUser user_id}}<span style="color: {{profile.color}}" class="username">{{username}}</span>{{/with}}
-        <span class="message-content">{{#markdown}}{{message}}{{/markdown}}</span>
+        <span class="message-content">{{{message}}}</span>
     </div>
 
 </template>
