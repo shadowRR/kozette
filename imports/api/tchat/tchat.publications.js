@@ -24,7 +24,7 @@ Meteor.publish( 'messages.list', function () {
         throw new Meteor.Error( 'no-user-id', 'There is no user connected' );
 
     const selector = {},
-        options = { limit: 50, sort: { created_at: -1 } };
+        options = { limit: 200, sort: { created_at: -1 } };
 
     return Messages.find( selector, options );
 
