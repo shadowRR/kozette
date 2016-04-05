@@ -61,7 +61,7 @@ Meteor.startup(function() {
 
         // only add a status message if the user isn't logged in on another device
         const selector = { user_id, updated_at: { $gt: four_minutes_ago } };
-        if ( UsersLogging.find( selector ).count() === 1 ) {
+        if ( UsersLogging.find( selector ).count() < 2) {
             let message = new Message();
             message.set( { user_id, message: 'is online. And nobody cares.', type: 'status' } );
             message.validate() && message.save();
