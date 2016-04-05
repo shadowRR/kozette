@@ -27,7 +27,6 @@ Template.message_input.helpers({
     initAutoComplete() {
         
         const usernames = Meteor.users.find().map( ( user ) => {
-            console.log(user);
             return user.username;
         } );
 

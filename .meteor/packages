@@ -18,7 +18,6 @@ jagi:astronomy
 jagi:astronomy-validators
 jagi:astronomy-timestamp-behavior
 accounts-password
-differential:event-hooks
 mizzao:timesync
 raix:push
 markdown
@@ -26,3 +25,5 @@ standard-minifier-css
 standard-minifier-js
 risul:autocomplete
 jquery
+babrahams:constellation
+percolate:synced-cron

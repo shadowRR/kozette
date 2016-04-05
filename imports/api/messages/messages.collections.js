@@ -49,15 +49,6 @@ export const Message = Astro.Class( {
                 Validators.string(),
                 Validators.choice( [ 'basic', 'info', 'status' ] )
             ]
-        },
-        color: {
-            type: 'string',
-            immutable: true,
-            optional: true
-        },
-        embed: {
-            type: 'array',
-            optional: true
         }
     },
     behaviors: {

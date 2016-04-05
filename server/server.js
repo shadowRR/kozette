@@ -1,7 +1,7 @@
 /**/
 
 // STARTUP
-import '../imports/startup/presence.init';
+import '../imports/startup/presence.server';
 
 // PUBLICATIONS
 import '../imports/api/tchat/tchat.publications';

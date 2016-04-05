@@ -10,7 +10,7 @@
 import './login.html';
 
 import {Meteor} from 'meteor/meteor';
-import {Accounts} from 'meteor/accounts-password';
+import {Accounts} from 'meteor/accounts-base';
 
 /* --- events --- */
 Template.login.events({
