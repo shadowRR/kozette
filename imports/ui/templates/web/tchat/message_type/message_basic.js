@@ -29,7 +29,7 @@ Template.message_basic.helpers( {
         // only if it's not the actual writer of the message
         if ( Meteor.userId() != this.user_id ) {
             // regex to select the user username
-            const reg = new RegExp( `\\b(${Meteor.user().username})\\b`, 'gm' );
+            const reg = new RegExp( `\\b(${Meteor.user().username})\\b`, 'gmi' );
             let name_split = message.split( reg );
 
             // if the username actually occurs
