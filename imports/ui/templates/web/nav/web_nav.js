@@ -18,7 +18,7 @@ Template.web_nav.helpers({
      * @returns {String}
      */
     mute() {
-        return Session.get('mute') ? 
+        return Meteor.user().profile.mute ? 
             'logo/kozette_large_nosound.png' :
             'logo/kozette_large_transparent.png';
     }

@@ -156,6 +156,14 @@ button:hover, a:hover {
 	color: red;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
 .oneliner {
 	display: inline-block;
 	max-height: 20px;
