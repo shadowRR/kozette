@@ -20,26 +20,31 @@ import {Template} from 'meteor/templating';
 import {Message} from '../../../../api/messages/messages.collections';
 import {Kozette} from '../../../../api/kozette/kozette.init';
 
-Template.message_input.helpers({
+Template.message_input.helpers( {
     /**
      * @summary init the autocomplete system
      */
     initAutoComplete() {
-        
+
         const usernames = Meteor.users.find().map( ( user ) => {
             return user.username;
         } );
 
-        //jQuery('#message-input').atwho()
+        $( '#message-input' )
+            .atwho( {
+                at: '@',
+                data: usernames,
+                insertTpl: "${name}"
+            } )
+            .atwho( {
+                at: '/',
+                data: [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ],
+                insertTpl: "${name}",
+                limit: 30
+            } );
 
-        $('#message-input').atwho({
-            at: '@',
-            data: usernames,
-            insertTpl: "${name}"
-        });
-        
     }
-});
+} );
 
 /* --- events --- */
 Template.message_input.events( {
