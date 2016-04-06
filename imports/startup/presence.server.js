@@ -41,12 +41,7 @@ Meteor.startup( function () {
                 const selector = { user_id, updated_at: { $gt: four_minutes_ago } };
                 if ( UsersLogging.find( selector ).count() === 0 ) {
 
-                    Meteor.users.update( user_id, {
-                        $set: {
-                            'profile.connection': 'offline',
-                            "services.resume.loginTokens": []
-                        }
-                    } );
+                    Meteor.users.update( user_id, { $set: { 'profile.connection': 'offline' } } );
 
                     let message = new Message();
                     message.set( { user_id, message: 'has left. Like a bitch.', type: 'status' } );

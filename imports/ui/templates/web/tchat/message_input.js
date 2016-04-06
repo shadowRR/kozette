@@ -20,6 +20,8 @@ import {Template} from 'meteor/templating';
 import {Message} from '../../../../api/messages/messages.collections';
 import {Kozette} from '../../../../api/kozette/kozette.init';
 
+import {Roles} from 'meteor/alanning:roles';
+
 Template.message_input.helpers( {
     /**
      * @summary init the autocomplete system
@@ -30,6 +32,15 @@ Template.message_input.helpers( {
             return user.username;
         } );
 
+        let commands = [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ];
+        // add admin commands
+        if ( Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) )
+            commands = commands.concat( [ '/kick-user', '/delete-user' ] );
+        // add moderator commands
+        if ( Roles.userIsInRole( Meteor.userId(), [ 'moderator' ] ) )
+            commands = commands.concat( [ '/kick-user' ] );
+
+
         $( '#message-input' )
             .atwho( {
                 at: '@',
@@ -38,7 +49,7 @@ Template.message_input.helpers( {
             } )
             .atwho( {
                 at: '/',
-                data: [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ],
+                data: commands,
                 insertTpl: "${name}",
                 limit: 30
             } );

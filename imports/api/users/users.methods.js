@@ -117,5 +117,58 @@ Meteor.methods( {
 
         return;
 
+    },
+    /**
+     * @summary kick a user, when admin or moderator
+     * @param username
+     */
+    'user.kick'( username ) {
+
+        if ( !Meteor.user() )
+            throw new Meteor.Error( 'UserNotFound', 'No user connected' );
+
+        const user_id = Meteor.userId();
+
+        if ( !Roles.userIsInRole( user_id, [ 'admin', 'moderator' ] ) )
+            throw new Meteor.Error( 'NotAdminOrModerator', 'Only admin and moderator are able to use this function' );
+
+        // trim username to make sure last char isn't a space
+        username.replace(/\s+$/, '');
+
+        const admin = Roles.userIsInRole( user_id, [ 'admin' ] ),
+            selector_admin = { username },
+            selector_moderator = { username, roles: { $nin: [ 'admin', 'moderator' ] } },
+            set = { $set: { 'profile.connection': 'offline', "services.resume.loginTokens": [] } };
+
+        // if connected user is admin, there he/she can kick anybody
+        // otherwise, a moderator can only kick normal users
+        admin ?
+            Meteor.users.update( selector_admin, set ) :
+            Meteor.users.update( selector_moderator, set );
+
+        return;
+
+    },
+    /**
+     * @summary remove a user when admin
+     * @param username
+     */
+    'user.delete'( username ) {
+
+        if ( !Meteor.user() )
+            throw new Meteor.Error( 'UserNotFound', 'No user connected' );
+
+        const user_id = Meteor.userId();
+
+        if ( !Roles.userIsInRole( user_id, [ 'admin' ] ) )
+            throw new Meteor.Error( 'NotAdmin', 'Only admin are able to use this function' );
+
+        // trim username to make sure last char isn't a space
+        username.replace(/\s+$/, '');
+
+        Meteor.users.remove( { username } );
+
+        return;
+
     }
 } );

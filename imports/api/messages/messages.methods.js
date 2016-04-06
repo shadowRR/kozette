@@ -14,11 +14,13 @@
  */
 
 import {Meteor} from 'meteor/meteor';
+import {TimeSync} from 'meteor/mizzao:timesync';
 
 Meteor.methods( {
     /**
      * @summary insert a basic message
      * @param {Object} message
+     * @return
      */
     'message.insert' ( message ) {
 
@@ -39,14 +41,14 @@ Meteor.methods( {
 
         message.save();
 
-        Push.debug = true;
-
-        Push.send({
-            from: 'push',
-            title: Meteor.user().username || 'Unknown',
-            text: message.message,
-            query: {}
-        });
+        // Push.debug = true;
+        //
+        // Push.send({
+        //     from: 'push',
+        //     title: Meteor.user().username || 'Unknown',
+        //     text: message.message,
+        //     query: {}
+        // });
 
         return;
     }

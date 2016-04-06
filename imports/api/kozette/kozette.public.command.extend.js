@@ -2,6 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {Message} from '../messages/messages.collections';
 import {MessagePinned} from '../messages_pinned/messages_pinned.collections';
 import {Kozette} from './kozette.init';
+import {Roles} from 'meteor/alanning:roles';
 
 let command = {
     /**
@@ -10,7 +11,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand( message ) {
-        const reg = /^\/(nick|color|me|status|pin|help|mute|unmute)\b/;
+        const reg = /^\/(nick|color|me|status|pin|help|mute|unmute|kick-user|delete-user)\b/;
         return reg.test( message );
     },
     /**
@@ -79,20 +80,35 @@ let command = {
         const muteRegEx = /^\/mute\b/;
         if ( muteRegEx.test( command ) ) {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.mute': true } } );
-            // const mute_value = Session.get( 'mute' );
-            // Session.set( 'mute', !mute_value );
-            // check if duration was specified
-            // const duration = +command.substring( command.indexOf( ' ' ) + 1 );
-            // if ( duration && _.isNumber( duration ) ) {
-            //     Meteor.setTimeout( function ( mute_value ) {
-            //         Session.set( 'mute', mute_value );
-            //     }, 1000 * 60 * duration );
-            // }
         }
         // for the unmute command
         const unmuteRegEx = /^\/unmute\b/;
         if ( unmuteRegEx.test( command ) ) {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.mute': false } } );
+        }
+        // for the kick-user command (admin/moderator)
+        const kickUserRegEx = /^\/kick-user\b/;
+        if ( kickUserRegEx.test( command ) ) {
+            let username = command.substring( command.indexOf( ' ' ) + 1 );
+            // for convience, check that a username was specified and
+            // that the user requesting the command is admin and moderator
+            if ( username && Roles.userIsInRole( Meteor.userId(), [ 'admin', 'moderator' ] ) ) {
+                Meteor.call( 'user.kick', username, ( err ) => {
+                    if ( err ) console.log( err );
+                } );
+            }
+        }
+        // for the delete-user command (admin)
+        const deleteUserRegEx = /^\/delete-user\b/;
+        if ( deleteUserRegEx.test( command ) ) {
+            let username = command.substring( command.indexOf( ' ' ) + 1 );
+            // for convience, check that a username was specified and
+            // that the user requesting the command is admin
+            if ( username && Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) ) {
+                Meteor.call( 'user.delete', username, ( err ) => {
+                    if ( err ) console.log( err );
+                } );
+            }
         }
     }
 };
