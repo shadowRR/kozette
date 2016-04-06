@@ -21,14 +21,14 @@ import {UsersLogging} from '../api/users/users_logging.collections';
 
 import moment from 'moment';
 
-Meteor.startup(function() {
+Meteor.startup( function () {
 
     // check online status of users every 4 minutes
     SyncedCron.add( {
         name: 'Checking online status of users',
         schedule: function ( parser ) {
             // parser is a later.parse object
-            return parser.text( 'every 4 minutes' );
+            return parser.text( 'every 2 minutes' );
         },
         job: function () {
 
@@ -41,7 +41,12 @@ Meteor.startup(function() {
                 const selector = { user_id, updated_at: { $gt: four_minutes_ago } };
                 if ( UsersLogging.find( selector ).count() === 0 ) {
 
-                    Meteor.users.update( user_id, { $set: { 'profile.connection': 'offline' } } );
+                    Meteor.users.update( user_id, {
+                        $set: {
+                            'profile.connection': 'offline',
+                            "services.resume.loginTokens": []
+                        }
+                    } );
 
                     let message = new Message();
                     message.set( { user_id, message: 'has left. Like a bitch.', type: 'status' } );
@@ -57,16 +62,16 @@ Meteor.startup(function() {
     Accounts.onLogin( function () {
 
         const user_id = Meteor.userId(),
-            four_minutes_ago = moment().subtract( 4, 'minutes' ).toDate();
+            four_minutes_ago = moment().subtract( 2, 'minutes' ).toDate();
 
         // only add a status message if the user isn't logged in on another device
         const selector = { user_id, updated_at: { $gt: four_minutes_ago } };
-        if ( UsersLogging.find( selector ).count() < 2) {
+        if ( UsersLogging.find( selector ).count() < 1 ) {
             let message = new Message();
             message.set( { user_id, message: 'is online. And nobody cares.', type: 'status' } );
             message.validate() && message.save();
         }
 
     } );
-    
-});
+
+} );

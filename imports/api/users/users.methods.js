@@ -17,6 +17,8 @@ import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {UserLogging, UsersLogging} from './users_logging.collections';
 
+import moment from 'moment';
+
 Meteor.methods( {
     /**
      * @summary set a new username
@@ -45,7 +47,7 @@ Meteor.methods( {
             throw new Meteor.Error( 'UserNotFound', 'No user connected' );
 
         const user_id = Meteor.userId(),
-            four_minutes_ago = moment().subtract( 4, 'minutes' ).toDate();
+            four_minutes_ago = moment().subtract( 2, 'minutes' ).toDate();
 
         Meteor.defer( function () {
 
@@ -85,7 +87,7 @@ Meteor.methods( {
         const user_logging = new UserLogging();
         user_logging.set( {
             user_id,
-            infos,
+            infos
         } );
 
         if ( !user_logging.validate() )
