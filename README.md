@@ -18,6 +18,8 @@ List of available commands :
 - `/mute` `/unmute` : to mute sounds of the web app (show a special red logo has a feedback and also a line-through the username for other users to see)
 - `/kick-user [*username*]` : (admin/moderator only) kick a user off the chat
 - `/delete-user [*username*]` : (admin only) delete a user account
+- `/set-moderator [*username*]` : (admin only) add a user to the moderator role
+- `/remove-moderator [*username*]` : (admin only) remove a user from the moderator role
 
 User visual roles :
 
