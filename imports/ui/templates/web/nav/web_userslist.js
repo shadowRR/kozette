@@ -29,6 +29,23 @@ Template.web_userslist.helpers( {
         return Meteor.users.find( { 'profile.connection': 'offline' } );
     },
     /**
+     * @summary return textual icon if the user has a role
+     * or return the default_value
+     * @param default_value
+     * @returns {*}
+     */
+    user_role(default_value) {
+        const user = this;
+        
+        if(Roles.userIsInRole(user._id, ['admin']))
+            return '@';
+        
+        if(Roles.userIsInRole(user._id, ['moderator']))
+            return '&';
+        
+        return default_value;
+    },
+    /**
      * @summary get the mute field value for the specified user
      * @returns {*}
      */

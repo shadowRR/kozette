@@ -3,7 +3,7 @@
     <span class="oneliner">// Users -----------------------------------------------------------</span>
     {{#each users_online}}
         <div id="user" style="color: {{profile.color}}">
-            <span class="green-text bold">+</span>
+            <span class="green-text bold">{{user_role '+'}}</span>
             {{#if mute}}
                 <span class="line-through">{{username}}</span>
             {{else}}
@@ -14,7 +14,7 @@
     {{/each}}
     {{#each users_offline}}
         <div id="user" style="color: {{profile.color}}">
-            <span class="red-text bold">-</span>
+            <span class="red-text bold">{{user_role '-'}}</span>
             {{username}} {{#if profile.status}}({{profile.status}}){{/if}}
         </div>
     {{/each}}
