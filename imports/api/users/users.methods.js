@@ -133,7 +133,7 @@ Meteor.methods( {
             throw new Meteor.Error( 'NotAdminOrModerator', 'Only admin and moderator are able to use this function' );
 
         // trim username to make sure last char isn't a space
-        username.replace(/\s+$/, '');
+        username.replace( /\s+$/, '' );
 
         const admin = Roles.userIsInRole( user_id, [ 'admin' ] ),
             selector_admin = { username },
@@ -164,9 +164,36 @@ Meteor.methods( {
             throw new Meteor.Error( 'NotAdmin', 'Only admin are able to use this function' );
 
         // trim username to make sure last char isn't a space
-        username.replace(/\s+$/, '');
+        username.replace( /\s+$/, '' );
 
         Meteor.users.remove( { username } );
+
+        return;
+
+    },
+    /**
+     * @summary set a user moderator role
+     * @param username
+     * @param add specifiy if adding, or removing the moderator role
+     */
+    'user.set.moderator'( username, add = true ) {
+
+        if ( !Meteor.user() )
+            throw new Meteor.Error( 'UserNotFound', 'No user connected' );
+
+        const user_id = Meteor.userId();
+
+        if ( !Roles.userIsInRole( user_id, [ 'admin' ] ) )
+            throw new Meteor.Error( 'NotAdmin', 'Only admin are able to use this function' );
+
+        // trim username to make sure last char isn't a space
+        username.replace( /\s+$/, '' );
+        const user = Meteor.users.findOne( { username } );
+
+        // if adding, or removing the role
+        add ?
+            Roles.addUsersToRoles( user._id, [ 'moderator' ] ) :
+            Roles.setUserRoles( user._id, [] );
 
         return;
 

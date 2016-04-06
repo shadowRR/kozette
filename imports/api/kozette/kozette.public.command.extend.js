@@ -11,7 +11,7 @@ let command = {
      * @return {Boolean}
      */
     isCommand( message ) {
-        const reg = /^\/(nick|color|me|status|pin|help|mute|unmute|kick-user|delete-user)\b/;
+        const reg = /^\/(nick|color|me|status|pin|help|mute|unmute|kick-user|delete-user|set-moderator|remove-moderator)\b/;
         return reg.test( message );
     },
     /**
@@ -20,6 +20,7 @@ let command = {
      * @return
      */
     executeCommand( command ) {
+
         // for the nick command
         const nickRegEx = /^\/nick\b/;
         if ( nickRegEx.test( command ) ) {
@@ -27,6 +28,7 @@ let command = {
             Meteor.call( 'user.set.username', nick );
             return;
         }
+
         // for the color command
         const colorRegEx = /^\/color\b/;
         if ( colorRegEx.test( command ) ) {
@@ -34,6 +36,7 @@ let command = {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.color': color } } );
             return;
         }
+
         // for the /me command
         const meRegEx = /^\/me\b/;
         if ( meRegEx.test( command ) ) {
@@ -45,6 +48,7 @@ let command = {
             } );
             return;
         }
+
         // for the /status command
         const statusRegEx = /^\/status\b/;
         if ( statusRegEx.test( command ) ) {
@@ -53,6 +57,7 @@ let command = {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.status': text } } );
             return;
         }
+
         // for the /pin command
         const pinRegEx = /^\/pin\b/;
         if ( pinRegEx.test( command ) ) {
@@ -71,21 +76,25 @@ let command = {
             } );
             return;
         }
+
         // for the help command
         const helpRegEx = /^\/help\b/;
         if ( helpRegEx.test( command ) ) {
             return;
         }
+
         // for the mute command
         const muteRegEx = /^\/mute\b/;
         if ( muteRegEx.test( command ) ) {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.mute': true } } );
         }
+
         // for the unmute command
         const unmuteRegEx = /^\/unmute\b/;
         if ( unmuteRegEx.test( command ) ) {
             Meteor.users.update( Meteor.userId(), { $set: { 'profile.mute': false } } );
         }
+
         // for the kick-user command (admin/moderator)
         const kickUserRegEx = /^\/kick-user\b/;
         if ( kickUserRegEx.test( command ) ) {
@@ -98,6 +107,7 @@ let command = {
                 } );
             }
         }
+
         // for the delete-user command (admin)
         const deleteUserRegEx = /^\/delete-user\b/;
         if ( deleteUserRegEx.test( command ) ) {
@@ -106,6 +116,32 @@ let command = {
             // that the user requesting the command is admin
             if ( username && Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) ) {
                 Meteor.call( 'user.delete', username, ( err ) => {
+                    if ( err ) console.log( err );
+                } );
+            }
+        }
+
+        // for the set-user-roles command (admin)
+        const setModeratorRegEx = /^\/set-moderator\b/;
+        if ( setModeratorRegEx.test( command ) ) {
+            let username = command.substring( command.indexOf( ' ' ) + 1 );
+            // for convience, check that a username was specified and
+            // that the user requesting the command is admin
+            if ( username && Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) ) {
+                Meteor.call( 'user.set.moderator', username, ( err ) => {
+                    if ( err ) console.log( err );
+                } );
+            }
+        }
+
+        // for the set-user-roles command (admin)
+        const removeModeratorRegEx = /^\/remove-moderator\b/;
+        if ( removeModeratorRegEx.test( command ) ) {
+            let username = command.substring( command.indexOf( ' ' ) + 1 );
+            // for convience, check that a username was specified and
+            // that the user requesting the command is admin
+            if ( username && Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) ) {
+                Meteor.call( 'user.set.moderator', username, false, ( err ) => {
                     if ( err ) console.log( err );
                 } );
             }

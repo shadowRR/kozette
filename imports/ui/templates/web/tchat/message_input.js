@@ -35,7 +35,7 @@ Template.message_input.helpers( {
         let commands = [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ];
         // add admin commands
         if ( Roles.userIsInRole( Meteor.userId(), [ 'admin' ] ) )
-            commands = commands.concat( [ '/kick-user', '/delete-user' ] );
+            commands = commands.concat( [ '/kick-user', '/delete-user', 'set-moderator', 'remove-moderator' ] );
         // add moderator commands
         if ( Roles.userIsInRole( Meteor.userId(), [ 'moderator' ] ) )
             commands = commands.concat( [ '/kick-user' ] );
