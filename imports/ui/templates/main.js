@@ -11,6 +11,7 @@ import './main.html';
 
 import {Meteor} from 'meteor/meteor';
 import {Split} from '../../lib/split.min.js';
+import Favico from '../../lib/favico.min.js';
 
 import './web/auth/login';
 import './web/tchat/tchat';
@@ -43,6 +44,19 @@ Template.main.helpers( {
     }
 } );
 
+/* --- oncreated --- */
+Template.web_app.onCreated( function () {
+    let self = this;
+
+    // init the favicon notifications
+    let favicon = new Favico( { animation: 'none' } );
+
+    self.autorun( function () {
+        favicon.badge( Session.get( 'favicon_notif' ) );
+    } );
+
+} );
+
 /* --- app onrendered --- */
 Template.web_app.onRendered( function () {
 
@@ -51,13 +65,13 @@ Template.web_app.onRendered( function () {
         minSize: [ 400, 200 ],
         gutterSize: 8,
         cursor: 'col-resize'
-    } )
+    } );
 
     Split( [ '#nav', '#pinned' ], {
         direction: 'vertical',
         sizes: [ 75, 25 ],
         gutterSize: 8,
         cursor: 'row-resize'
-    } )
+    } );
 
 } );

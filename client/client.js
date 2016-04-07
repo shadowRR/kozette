@@ -1,5 +1,6 @@
 // STARTUP
 import '../imports/startup/presence.client.js';
+import '../imports/startup/favicon_notifications.client';
 
 // METHODS
 import '../imports/api/messages/messages.methods.js';

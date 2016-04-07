@@ -16,6 +16,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {UserLogging, UsersLogging} from './users_logging.collections';
+import {Message} from '../messages/messages.collections';
 
 import moment from 'moment';
 
@@ -136,15 +137,24 @@ Meteor.methods( {
         username.replace( /\s+$/, '' );
 
         const admin = Roles.userIsInRole( user_id, [ 'admin' ] ),
-            selector_admin = { username },
-            selector_moderator = { username, roles: { $nin: [ 'admin', 'moderator' ] } },
-            set = { $set: { 'profile.connection': 'offline', "services.resume.loginTokens": [] } };
+            user = Meteor.users.findOne( { username } );
 
-        // if connected user is admin, there he/she can kick anybody
-        // otherwise, a moderator can only kick normal users
-        admin ?
-            Meteor.users.update( selector_admin, set ) :
-            Meteor.users.update( selector_moderator, set );
+        if ( user ) {
+            const selector_admin = { _id: user._id },
+                selector_moderator = { _id: user._id, roles: { $nin: [ 'admin', 'moderator' ] } },
+                set = { $set: { 'profile.connection': 'offline', "services.resume.loginTokens": [] } };
+            // if connected user is admin, there he/she can kick anybody
+            // otherwise, a moderator can only kick normal users
+            admin ?
+                Meteor.users.update( selector_admin, set ) :
+                Meteor.users.update( selector_moderator, set );
+
+            // add the status message
+            let message = new Message();
+            message.set( { user_id: user._id, message: 'was ejected by a moderator. BOUM! bitch.', type: 'status' } );
+            message.validate() && message.save();
+
+        }
 
         return;
 

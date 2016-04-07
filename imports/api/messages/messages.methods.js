@@ -51,5 +51,13 @@ Meteor.methods( {
         // });
 
         return;
+    },
+    'message.get.embed'( url ) {
+
+        if ( !Meteor.user() )
+            throw new Meteor.Error( 'UserNotFound', 'No user connected' );
+
+        const user_id = Meteor.userId();
+        
     }
 } );

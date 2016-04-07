@@ -39,6 +39,14 @@ Template.tchat.helpers( {
                     if ( !Meteor.user().profile.mute )
                         sound.play();
                 }
+
+                // increment the notification counter if the user
+                // isn't focused on the window
+                if ( !Session.get( 'window_focused' ) ) {
+                    const notif_counter = Session.get( 'favicon_notif' );
+                    Session.set( 'favicon_notif', notif_counter + 1 );
+                }
+
             }
         } )
         return query;
@@ -67,4 +75,14 @@ Template.tchat.onCreated( function () {
         self.subscribe( 'messages.list' );
         self.subscribe( 'messages.pinned.list' );
     } );
+} );
+
+/* --- onrendered --- */
+Template.tchat.onRendered( function () {
+
+    Meteor.setInterval( function () {
+        const last_message = $( '.message-item' ).last()[ 0 ];
+        last_message && last_message.scrollIntoView();
+    }, 1000 );
+
 } );
