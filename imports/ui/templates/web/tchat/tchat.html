@@ -1,6 +1,11 @@
 <template name="tchat">
 
     <div id="tchat">
+
+        <audio id="audio-kozette-connection" src="sounds/kozette_connection.mp3" preload="auto"></audio>
+        <audio id="audio-kozette-disconnection" src="sounds/kozette_disconnection.mp3" preload="auto"></audio>
+        <audio id="audio-kozette-message" src="sounds/kozette_message.mp3" preload="auto"></audio>
+
         <div id="message-list">
             {{#each messages}}
 
@@ -8,7 +13,9 @@
 
             {{/each}}
         </div>
+
         {{> message_input}}
+
     </div>
 
 </template>

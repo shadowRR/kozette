@@ -25,9 +25,7 @@ Template.tchat.helpers( {
      * @return {Mongo.Cursor}
      */
     messages() {
-        // prepare the sound to trigger
-        // when receiving a new message
-        let sound = new Audio( 'sounds/kozette_message.mp3' );
+
         let query = Messages.find( {}, { sort: { created_at: 1 } } );
         query.observe( {
             added( doc ) {
@@ -37,7 +35,7 @@ Template.tchat.helpers( {
                 if ( Meteor.userId() != doc.user_id && doc.type === 'basic' ) {
                     // if mute mode isn't active
                     if ( !Meteor.user().profile.mute )
-                        sound.play();
+                        $( '#audio-kozette-message' )[ 0 ].play();
                 }
 
                 // increment the notification counter if the user
@@ -49,6 +47,7 @@ Template.tchat.helpers( {
 
             }
         } )
+
         return query;
     },
     /**
