@@ -8,6 +8,7 @@ import '../imports/api/messages_pinned/messages_pinned.methods.js';
 
 // UI
 import '../imports/ui/styles/styles.css';
+import '../imports/ui/styles/tooltipster.css';
 
 // TEMPLATES
 import '../imports/ui/templates/main';

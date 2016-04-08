@@ -49,6 +49,12 @@ export const Message = Astro.Class( {
                 Validators.string(),
                 Validators.choice( [ 'basic', 'info', 'status' ] )
             ]
+        },
+        links: {
+            type: 'array',
+            default() {
+                return [];
+            }
         }
     },
     behaviors: {
