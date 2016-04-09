@@ -38,8 +38,7 @@ Template.message_basic.helpers( {
             // if the username actually occurs
             if ( name_split.length > 1 ) {
                 const color = Meteor.user().profile.color,
-                    border = `border-left: 1px solid ${color}; border-right: 1px solid ${color}`,
-                    user_string = `<span style="${border}">${name_split[ 1 ]}</span>`;
+                    user_string = `<span style="background: ${color}; padding: 3px;">${name_split[ 1 ]}</span>`;
 
                 message = message.replace( reg, user_string );
             }

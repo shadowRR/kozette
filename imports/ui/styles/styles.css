@@ -130,6 +130,12 @@ a {
 	width: calc(100% - 20px);
 }
 
+button {
+	background: transparent;
+	border: none;
+	font-size: 12px;
+}
+
 button:hover, a:hover {
 	background: #0096c1;
 	color: #00303e;

@@ -18,7 +18,7 @@ Template.login.events({
      * @summary login
      * @param e
      */
-    'click .blue-link'( e ) {
+    'click .blue-link, submit form'( e ) {
         e.preventDefault();
         const email = $( '#username' ).val();
         const password = $( '#password' ).val();

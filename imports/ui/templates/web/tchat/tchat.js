@@ -34,7 +34,7 @@ Template.tchat.helpers( {
                 //  trigger the new message sound
                 if ( Meteor.userId() != doc.user_id && doc.type === 'basic' ) {
                     // if mute mode isn't active
-                    if ( !Meteor.user().profile.mute )
+                    if ( !Meteor.user().profile.mute && !Session.get( 'window_focused' ) )
                         $( '#audio-kozette-message' )[ 0 ].play();
                 }
 
