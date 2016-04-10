@@ -64,26 +64,35 @@ Template.message_input.events( {
      * @param e
      */
     'keypress input[name=message]'( e ) {
-        if ( e.keyCode == 13 ) {
-            const text = $( '[name=message]' ).val() || null;
 
-            if ( Kozette.public.command.isCommand( text ) ) {
-                Kozette.public.command.executeCommand( text );
-                $( '[name=message]' ).val( '' );
+        // on enter key
+        if ( e.keyCode == 13 ) {
+
+            const message = $( '[name=message]' ).val() || null,
+                user_id = Meteor.userId();
+
+            if ( Kozette.public.command.isCommand( message ) ) {
+
+                Kozette.public.command.executeCommand( message );
+                
             } else {
-                let message = new Message();
-                message.set( {
-                    user_id: Meteor.userId(),
-                    message: text,
-                    type: 'basic'
-                } );
-                if ( message.validate() ) {
-                    Meteor.call( 'message.insert', message, ( err ) => {
+
+                let message_doc = new Message();
+                message_doc.set( { user_id, message, type: 'basic' } );
+
+                if ( message_doc.validate() ) {
+
+                    Meteor.call( 'message.insert', message_doc, err => {
                         if ( err )console.log( err );
+                        Session.set( 'autoScrollingActive', true );
                     } );
-                    $( '[name=message]' ).val( '' );
+
                 }
+
             }
+
+            $( '[name=message]' ).val( '' );
+
         }
     }
 } );

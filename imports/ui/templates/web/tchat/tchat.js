@@ -66,12 +66,39 @@ Template.tchat.helpers( {
     }
 } );
 
+/* --- events --- */
+Template.tchat.events( {
+    /**
+     * @summary set the auto scroll boolean depending on
+     * if the user is scrolling to see history or not
+     */
+    'scroll #message-list'() {
+        
+        const how_close = 80,  // pixels leeway to be considered "at Bottom"
+            message_list = $( "#message-list" ),
+            scroll_height = message_list.prop( "scrollHeight" ),
+            scroll_bottom = message_list.prop( "scrollTop" ) + message_list.height(),
+            at_bottom = scroll_bottom > (scroll_height - how_close);
+        
+        Session.set( 'autoScrollingActive', at_bottom );
+    }
+} );
+
 /* --- oncreated --- */
 Template.tchat.onCreated( function () {
     var self = this;
 
+    Session.set( 'autoScrollingActive', true );
+
     self.autorun( function () {
-        self.subscribe( 'messages.list' );
+        self.subscribe( 'messages.list', {
+            onReady() {
+                // auto scroll to bottom when the chat
+                // window is first loaded
+                const last_message = $( '.message-item' ).last()[ 0 ];
+                last_message && last_message.scrollIntoView();
+            }
+        } );
         self.subscribe( 'messages.pinned.list' );
     } );
 } );
@@ -79,9 +106,12 @@ Template.tchat.onCreated( function () {
 /* --- onrendered --- */
 Template.tchat.onRendered( function () {
 
+    // auto scroll to bottom if the autoScrolling is active
     Meteor.setInterval( function () {
-        const last_message = $( '.message-item' ).last()[ 0 ];
-        last_message && last_message.scrollIntoView();
+        if ( Session.get( 'autoScrollingActive' ) ) {
+            const last_message = $( '.message-item' ).last()[ 0 ];
+            last_message && last_message.scrollIntoView();
+        }
     }, 1000 );
 
 } );
