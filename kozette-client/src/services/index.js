@@ -7,7 +7,7 @@ import auth from 'feathers-authentication/client';
 import io from 'socket.io-client';
 
 // connect to feathersJS server
-const socket = io( env.NODE_ENV === 'production' ? 'http://kozette.fueledbd.com' : 'http://localhost:3030' );
+const socket = io( 'http://kozette.fueledbd.com' );
 
 export const feathers_socket = feathers()
     .configure( socketio( socket ) )
