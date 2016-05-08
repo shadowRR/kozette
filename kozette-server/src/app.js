@@ -11,7 +11,7 @@ const hooks = require( 'feathers-hooks' );
 const socketio = require( 'feathers-socketio' );
 const middleware = require( './middleware' );
 const services = require( './services' );
-const lib = require( './lib' );
+const plugins = require( './plugins' );
 
 const app = feathers();
 
@@ -26,6 +26,6 @@ app.use( compress() )
     .configure( socketio() )
     .configure( services )
     .configure( middleware )
-    .configure( lib );
+    .configure( plugins );
 
 module.exports = app;
