@@ -7,7 +7,7 @@ import auth from 'feathers-authentication/client';
 import io from 'socket.io-client';
 
 // connect to feathersJS server
-const socket = io( process.env.SERVER_URL || 'http://localhost:3030' );
+const socket = io( 'ec2-52-58-88-164.eu-central-1.compute.amazonaws.com' );
 
 export const feathers_socket = feathers()
     .configure( socketio( socket ) )

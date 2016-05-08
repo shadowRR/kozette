@@ -26,8 +26,5 @@ module.exports = merge( baseWebpackConfig, {
             template: 'index.html',
             inject: true
         } )
-    ],
-    externals: [
-        { 'SERVER_URL': 'http://localhost:3030' }
     ]
 } );

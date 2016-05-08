@@ -27,7 +27,6 @@ module.exports = merge( baseWebpackConfig, {
         new webpack.DefinePlugin( {
             'process.env': {
                 NODE_ENV: '"production"',
-                SOURCE_URL: '"ec2-52-58-88-164.eu-central-1.compute.amazonaws.com"'
             }
         } ),
         new webpack.optimize.UglifyJsPlugin( {
