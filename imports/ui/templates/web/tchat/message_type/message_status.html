@@ -1,9 +1,0 @@
-<template name="message_status">
-
-    <div id="{{_id}}" class="message-item">
-        <span class="message-date">[{{getTime created_at}}]</span>
-        {{#with getUser user_id}}<p class="message message-status">*** The useless garbage known
-            as {{username}} {{../message}} ***</p>{{/with}}
-    </div>
-
-</template>
