@@ -12,7 +12,7 @@
     import {feathers_socket} from './services';
     import {currentUser} from './vuex/currentUser_getters';
     import {loginCurrentUser} from './vuex/currentUser_actions';
-    import {userStatusInterval} from './lib/users_status';
+    import {userStatusInterval} from 'plugins/users_status';
 
     export default {
         components: { Login, Base },

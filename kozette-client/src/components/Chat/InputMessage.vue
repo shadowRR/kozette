@@ -9,7 +9,7 @@
 
     import {currentUser} from '../../vuex/currentUser_getters';
     import {getUsersList} from '../../vuex/users_getters.js';
-    import Commands from '../../lib/kozette_commands';
+    import Commands from '../../plugins/kozette_commands';
     import {messageService} from '../../services';
 
     export default {

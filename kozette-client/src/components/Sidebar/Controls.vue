@@ -21,18 +21,15 @@
     import {logoutCurrentUser} from '../../vuex/currentUser_actions';
 
     export default {
+        data: {
+            serverStatus: feathers_socket.io.connected
+        },
         vuex: {
             getters: {
                 currentUser
             },
             actions: {
                 logoutCurrentUser
-            }
-        },
-        computed: {
-            serverStatus() {
-                // get the server status
-                return feathers_socket.io.connected;
             }
         },
         methods: {

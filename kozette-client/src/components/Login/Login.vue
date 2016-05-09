@@ -20,7 +20,7 @@
     import {feathers_socket, userService} from '../../services';
     import {loginCurrentUser} from '../../vuex/currentUser_actions';
     import {currentUser} from '../../vuex/currentUser_getters';
-    import {userStatusInterval} from '../../lib/users_status';
+    import {userStatusInterval} from '../../plugins/users_status';
 
     export default {
         data() {
