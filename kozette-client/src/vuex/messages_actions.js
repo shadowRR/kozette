@@ -26,7 +26,7 @@ export const addMessage = function ( { dispatch, state } ) {
                 // get the user for this message
                 const user = _.find( state.users, { _id: message.user_id } );
                 new Notification(
-                    `New message from ${user.nickname}`, {
+                    `New message from ${user.nickname || user.email}`, {
                         body: message.text,
                         icon: '/static/logo/mobile/logo_256.png'
                     } );

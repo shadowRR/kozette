@@ -60,7 +60,7 @@
             Split( [ '#message-list', '#input-message' ], {
                 direction: 'vertical',
                 sizes: [ 92, 8 ],
-                minSize: [ 400, 50 ],
+                minSize: [ 400, 25 ],
                 gutterSize: 8,
                 cursor: 'row-resize'
             } );
