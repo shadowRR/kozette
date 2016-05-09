@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import config from '../config';
 
 // connect to feathersJS server
-const socket = io( config.SERVER_URL );
+const socket = io( config.SERVER_URL, { reconnect: true } );
 
 export const feathers_socket = feathers()
     .configure( socketio( socket ) )

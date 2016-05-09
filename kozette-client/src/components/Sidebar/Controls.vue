@@ -4,7 +4,7 @@
 
     <span class="oneliner">// Server -----------------------------------------------------------</span>
     Server :
-    <span v-if="serverStatus" class="green-text">connected</span>
+    <span v-if="isServerConnected" class="green-text">connected</span>
     <span v-else class="red-text">offline</span>
 
     <span class="oneliner">// Account -----------------------------------------------------------</span>
@@ -21,8 +21,10 @@
     import {logoutCurrentUser} from '../../vuex/currentUser_actions';
 
     export default {
-        data: {
-            serverStatus: feathers_socket.io.connected
+        data() {
+            return {
+                isServerConnected: feathers_socket.io.connected
+            }
         },
         vuex: {
             getters: {
@@ -31,6 +33,17 @@
             actions: {
                 logoutCurrentUser
             }
+        },
+        ready() {
+
+            // socket io connect / disconnect behavior
+            feathers_socket.io
+                    .on( 'reconnect', () => {
+                        this.isServerConnected = true;
+                    } )
+                    .on( 'disconnect', () => {
+                        this.isServerConnected = false;
+                    } );
         },
         methods: {
             /**

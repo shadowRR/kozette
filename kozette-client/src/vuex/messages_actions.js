@@ -24,7 +24,7 @@ export const addMessage = function ( { dispatch, state } ) {
             // request perm, and if accepted, show
             Notification.requestPermission( () => {
                 // get the user for this message
-                const user = _.find( state.users, user => user._id === message.user_id );
+                const user = _.find( state.users, { _id: message.user_id } );
                 new Notification(
                     `New message from ${user.nickname}`, {
                         body: message.text,
