@@ -14,6 +14,7 @@
 
 <script type="text/babel">
 
+    // vuex
     import {getUsersList} from '../../vuex/users_getters.js';
     import {fetchUsers, addUser, updateAndPatchUser} from '../../vuex/users_actions.js';
 

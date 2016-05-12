@@ -17,10 +17,12 @@
 </template>
 
 <script type="text/babel">
+
+    // services
     import {feathers_socket, userService} from '../../services';
+    // vuex
     import {loginCurrentUser} from '../../vuex/currentUser_actions';
     import {currentUser} from '../../vuex/currentUser_getters';
-    import {userStatusInterval} from '../../plugins/users_status';
 
     export default {
         data() {
@@ -30,54 +32,34 @@
             };
         },
         vuex: {
-            getters: {
-                currentUser
-            },
-            actions: {
-                loginCurrentUser
-            }
+            getters: { currentUser },
+            actions: { loginCurrentUser }
         },
         methods: {
             /**
              * @summary login in
              */
             login() {
-
+                // authenticate
                 feathers_socket.authenticate( { type: 'token', email: this.email, password: this.password } )
                         .then( ( result ) => {
                             this.loginCurrentUser( result );
-                            // watching change in currentUser, so we can
-                            // detect when the currentUser disconnected
-                            // and stop the online status updates
-                            let interval = userStatusInterval( this.currentUser.data._id );
-                            this.$watch( 'currentUser', () => {
-                                if ( !this.currentUser )
-                                    clearInterval( interval );
-                            } );
+                            this.$router.go( { name: 'app' } );
                         } )
-                        .catch( err => {
-                            if ( err ) console.error( err );
-                        } );
-
+                        .catch( err => console.error( err ) );
             },
             /**
              * @summary register a new user
              */
             register() {
-
-                userService.create( {
-                            email: this.email,
-                            password: this.password
-                        } )
+                // create new user
+                userService.create( { email: this.email, password: this.password } )
                         .then( user => {
                             this.email = '';
                             this.password = '';
                             alert( 'user created - you can now log in' );
                         } )
-                        .catch( err => {
-                            if ( err ) console.error( err );
-                        } );
-
+                        .catch( err => console.error( err ) );
             }
         }
     }

@@ -13,15 +13,15 @@
     import {messageService} from '../../services';
 
     export default {
+        data() {
+            return {
+                inputMessage: ''
+            }
+        },
         vuex: {
             getters: {
                 currentUser,
                 users: getUsersList
-            }
-        },
-        data() {
-            return {
-                inputMessage: ''
             }
         },
         ready() {

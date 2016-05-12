@@ -12,14 +12,7 @@
     </audio>
 
     <main id="content" class="split split-horizontal">
-        <!-- chat -->
-        <section id="message-list" class="split">
-            <message-list></message-list>
-        </section>
-        <!-- input message -->
-        <section id="input-message" class="split">
-            <input-message></input-message>
-        </section>
+        <router-view></router-view>
     </main>
 
     <aside id="sidebar" class="split split-horizontal">
@@ -36,33 +29,23 @@
 
 </template>
 
-<script>
+<script type="text/babel">
 
+    // components
+    import Controls from './Sidebar/Controls.vue';
+    import UsersList from './Sidebar/UsersList.vue';
+    import PinnedMessagesList from './Sidebar/PinnedMessagesList.vue';
     // lib
     import Split from 'split.js';
-    // components
-    import MessageList from './MessageList.vue';
-    import InputMessage from './InputMessage.vue';
-    import Controls from './../Sidebar/Controls.vue';
-    import UsersList from './../Sidebar/UsersList.vue';
-    import PinnedMessagesList from './../Sidebar/PinnedMessagesList.vue';
 
     export default {
-        components: { Controls, MessageList, InputMessage, UsersList, PinnedMessagesList },
+        components: { Controls, UsersList, PinnedMessagesList },
         ready() {
             Split( [ '#content', '#sidebar' ], {
                 sizes: [ 85, 15 ],
                 minSize: [ 400, 200 ],
                 gutterSize: 8,
                 cursor: 'col-resize'
-            } );
-
-            Split( [ '#message-list', '#input-message' ], {
-                direction: 'vertical',
-                sizes: [ 92, 8 ],
-                minSize: [ 400, 25 ],
-                gutterSize: 8,
-                cursor: 'row-resize'
             } );
 
             Split( [ '#nav', '#pinned' ], {

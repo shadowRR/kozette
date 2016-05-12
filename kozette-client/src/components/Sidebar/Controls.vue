@@ -19,42 +19,35 @@
     // currentUser
     import {currentUser} from '../../vuex/currentUser_getters';
     import {logoutCurrentUser} from '../../vuex/currentUser_actions';
+    // plugins
+    import {userStatusInterval} from '../../plugins/users_status';
 
     export default {
         data() {
             return {
-                isServerConnected: feathers_socket.io.connected
+                isServerConnected: feathers_socket.io.connected,
+                interval: false
             }
         },
         vuex: {
-            getters: {
-                currentUser
-            },
-            actions: {
-                logoutCurrentUser
-            }
+            getters: { currentUser },
+            actions: { logoutCurrentUser }
         },
         ready() {
-
+            // online status
+            this.interval = userStatusInterval( this.currentUser.data._id );
             // socket io connect / disconnect behavior
             feathers_socket.io
-                    .on( 'reconnect', () => {
-                        this.isServerConnected = true;
-                    } )
-                    .on( 'disconnect', () => {
-                        this.isServerConnected = false;
-                    } );
+                    .on( 'reconnect', () => this.isServerConnected = true )
+                    .on( 'disconnect', () => this.isServerConnected = false );
         },
         methods: {
             /**
              * @summary logout the user
-             * @return
              */
             logout() {
-                // TODO the user won't be seen as logged out before
-                // at least a minute in case he is still available
-                // on another terminal
                 feathers_socket.logout();
+                clearInterval( this.interval );
                 this.logoutCurrentUser();
             }
         }
