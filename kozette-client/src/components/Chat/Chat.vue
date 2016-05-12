@@ -39,7 +39,7 @@
             Split( [ '#message-list', '#input-message' ], {
                 direction: 'vertical',
                 sizes: [ 92, 8 ],
-                minSize: [ 400, 25 ],
+                minSize: [ 400, 30 ],
                 gutterSize: 8,
                 cursor: 'row-resize'
             } );

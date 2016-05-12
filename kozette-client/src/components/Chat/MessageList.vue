@@ -1,6 +1,6 @@
 <template>
 
-    <div v-for="message in messages" class="message-item" track-by="_id">
+    <div v-for="message in messages | orderBy 'created_at'" class="message-item" track-by="_id">
         <message-basic :message="message"></message-basic>
     </div>
 

@@ -5,7 +5,7 @@ import {messageService} from '../services';
 
 export const fetchMessages = function ( { dispatch } ) {
     // get the messages list from feathers websockets
-    messageService.find( { query: { $sort: { created_at: 1 } } } )
+    messageService.find( { query: { $sort: { created_at: -1 } } } )
         .then( messages => {
             dispatch( 'FETCH_MESSAGES', messages.data );
         } );
