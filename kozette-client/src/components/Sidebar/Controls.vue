@@ -21,6 +21,8 @@
     import {logoutCurrentUser} from '../../vuex/currentUser_actions';
     // plugins
     import {userStatusInterval} from '../../plugins/users_status';
+    // vuex
+    import {loginCurrentUser} from '../../vuex/currentUser_actions';
 
     export default {
         data() {
@@ -31,11 +33,28 @@
         },
         vuex: {
             getters: { currentUser },
-            actions: { logoutCurrentUser }
+            actions: { logoutCurrentUser, loginCurrentUser }
         },
         ready() {
-            // online status
-            this.interval = userStatusInterval( this.currentUser.data._id );
+            // attempt auth is there's no current user
+            // redirect to login if it fails
+            if ( !this.currentUser ) {
+                feathers_socket.authenticate()
+                        .then( user => {
+                            this.loginCurrentUser( user );
+                            // online status
+                            this.interval = userStatusInterval( this.currentUser );
+                        } )
+                        .catch( err => {
+                            console.error( err );
+                            this.$router.go( { name: 'login' } );
+                        } );
+            }
+            else {
+                // online status
+                this.interval = userStatusInterval( this.currentUser );
+            }
+
             // socket io connect / disconnect behavior
             feathers_socket.io
                     .on( 'reconnect', () => this.isServerConnected = true )
@@ -45,7 +64,8 @@
             /**
              * @summary logout the user
              */
-            logout() {
+            logout()
+            {
                 feathers_socket.logout();
                 clearInterval( this.interval );
                 this.logoutCurrentUser();

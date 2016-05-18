@@ -11,18 +11,26 @@ exports.before = {
     ],
     find: [],
     get: [],
-    create: [ auth.associateCurrentUser( { as: 'user_id' } ) ],
-    update: [ hooks.disable() ],
+    create: [
+        auth.associateCurrentUser( { as: 'user_id' } )
+    ],
+    update: [
+        hooks.disable()
+    ],
     patch: [
         auth.restrictToOwner( { ownerField: 'user_id' } ),
         // only permit changing the pinned value
         hooks.pluck( 'pinned' )
     ],
-    remove: [ hooks.disable() ]
+    remove: [
+        hooks.disable()
+    ]
 };
 
 exports.after = {
-    all: [],
+    all: [
+        hooks.populate( 'user', { service: 'users', field: 'user_id' } )
+    ],
     find: [],
     get: [],
     create: [],

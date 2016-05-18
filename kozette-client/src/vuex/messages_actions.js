@@ -15,11 +15,14 @@ export const addMessage = function ( { dispatch, state } ) {
     // new message created on the server, dispatch it
     messageService.on( 'created', message => {
         // play sound if message is from another user
-        if ( (state.currentUser.data._id != message.user_id) && !state.currentUser.data.status.muted )
+        //
+        // so first, get the current user data
+        const loggedUser = _.find( state.users, user => user.id == state.currentUser );
+        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted )
             $( '#audio-kozette-message' )[ 0 ].play();
 
         // show notifications if available and permitted
-        if ( (state.currentUser.data._id != message.user_id) &&
+        if ( (state.currentUser != message.user_id) &&
             window.Notification && Notification.permission !== 'denied' ) {
             // request perm, and if accepted, show
             Notification.requestPermission( () => {

@@ -49,8 +49,8 @@
                             isCommand = Commands.isCommand( text );
 
                     isCommand ?
-                            // execute the command is it is one
-                            Commands.executeCommand( text, this.currentUser.data._id ) :
+                            // execute the command if it is one
+                            Commands.executeCommand( text, this.currentUser ) :
                             // otherwise, normal behavior, add the message
                             messageService.create( { text: this.inputMessage } )
                                     .catch( err => console.error( err ) );

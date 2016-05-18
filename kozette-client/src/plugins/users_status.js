@@ -16,14 +16,10 @@ export const userStatusInterval = ( _id ) => {
         // online try to patch if connected
         // to server
         if ( feathers_socket.io.connected )
-            userService.patch(
-                _id,
-                { 'status.online': true, 'status.lastSeen': new Date() },
-                ( err ) => {
-                    if ( err ) console.error( err );
-                } );
+            userService.patch( _id, { 'status.online': true, 'status.lastSeen': new Date() } )
+                .catch( err => console.error( err ) );
     };
-    
+
     // execute the first time in init since
     // loading this function means the user
     // just connected

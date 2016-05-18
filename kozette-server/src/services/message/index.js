@@ -2,7 +2,7 @@
 
 const path = require( 'path' );
 const service = require( 'feathers-mongoose' );
-const messageModel = require( '../../models/messages.models.js' );
+const messageModel = require( './message-model.js' );
 const hooks = require( './hooks' );
 
 module.exports = function () {

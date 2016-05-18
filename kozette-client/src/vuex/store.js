@@ -15,7 +15,7 @@ const state = {
 const mutations = {
 
     LOGIN_USER( state, user ) {
-        state.currentUser = user;
+        state.currentUser = user.data._id;
     },
 
     LOGOUT_USER( state ) {
