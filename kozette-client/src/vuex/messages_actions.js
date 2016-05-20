@@ -17,7 +17,7 @@ export const addMessage = function ( { dispatch, state } ) {
         // play sound if message is from another user
         //
         // so first, get the current user data
-        const loggedUser = _.find( state.users, user => user.id == state.currentUser );
+        const loggedUser = _.find( state.users, user => user._id == state.currentUser );
         if ( (state.currentUser != message.user_id) && !loggedUser.status.muted )
             $( '#audio-kozette-message' )[ 0 ].play();
 
