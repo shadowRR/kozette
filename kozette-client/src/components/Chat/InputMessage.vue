@@ -44,11 +44,15 @@
             sendMessage( e ) {
 
                 // if user isn't trying to just add a newline
-                if ( !e.shiftKey ) {
-                    const text = this.inputMessage,
-                            isCommand = Commands.isCommand( text );
+                if ( !e.shiftKey && !e.ctrlKey ) {
 
-                    isCommand ?
+                    const text = this.inputMessage.trim();
+
+                    // if empty message, stop here
+                    if ( text.length == 0 )
+                        return;
+
+                    Commands.isCommand( text ) ?
                             // execute the command if it is one
                             Commands.executeCommand( text, this.currentUser ) :
                             // otherwise, normal behavior, add the message
