@@ -10,9 +10,11 @@ module.exports = function () {
     let config = app.get( 'auth' );
     app.configure( authentication( config ) );
 
-    // TODO use it to trigger changes on user online status
-    // const tokenService = app.service( '/auth/token' );
-    // // setup before and after hooks
-    // tokenService.before( hooks.before );
-    // tokenService.after( hooks.after );
+    const tokenService = app.service( '/auth/token' );
+    
+    // setup before and after hooks
+    tokenService.before( hooks.before );
+    
+    tokenService.after( hooks.after );
+    
 };

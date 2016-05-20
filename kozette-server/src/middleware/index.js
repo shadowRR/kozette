@@ -10,6 +10,8 @@ module.exports = function () {
     // handling middleware should go last.
     const app = this;
 
+    console.log( app );
+    
     app.use( notFound() );
     app.use( logger( app ) );
     app.use( handler() );

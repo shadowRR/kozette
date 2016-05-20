@@ -1,6 +1,6 @@
 <template>
 
-    <img id="logo" src="/static/img/logo/kozette_large_transparent.png" alt="logo kozette">
+    <img id="logo" v-bind:src="logoIsMuted" alt="logo kozette">
 
     <span class="oneliner">// Server -----------------------------------------------------------</span>
     Server :
@@ -14,51 +14,40 @@
 
 <script type="text/babel">
 
+    // lib
+    import _ from 'lodash';
     // feathers
-    import {feathers_socket} from '../../services';
-    // currentUser
-    import {currentUser} from '../../vuex/currentUser_getters';
-    import {logoutCurrentUser} from '../../vuex/currentUser_actions';
-    // plugins
-    import {userStatusInterval} from '../../plugins/users_status';
+    import {feathers_socket, userService} from '../../services';
     // vuex
-    import {loginCurrentUser} from '../../vuex/currentUser_actions';
+    import {currentUser} from '../../vuex/currentUser_getters';
+    import {loginCurrentUser, logoutCurrentUser} from '../../vuex/currentUser_actions';
+    import {getUsersList} from '../../vuex/users_getters';
 
     export default {
         data() {
             return {
-                isServerConnected: feathers_socket.io.connected,
-                interval: false
+                isServerConnected: true
             }
         },
         vuex: {
-            getters: { currentUser },
+            getters: { currentUser, getUsersList },
             actions: { logoutCurrentUser, loginCurrentUser }
         },
         ready() {
-            // attempt auth is there's no current user
-            // redirect to login if it fails
-            if ( !this.currentUser ) {
-                feathers_socket.authenticate()
-                        .then( user => {
-                            this.loginCurrentUser( user );
-                            // online status
-                            this.interval = userStatusInterval( this.currentUser );
-                        } )
-                        .catch( err => {
-                            console.error( err );
-                            this.$router.go( { name: 'login' } );
-                        } );
-            }
-            else {
-                // online status
-                this.interval = userStatusInterval( this.currentUser );
-            }
-
-            // socket io connect / disconnect behavior
             feathers_socket.io
                     .on( 'reconnect', () => this.isServerConnected = true )
                     .on( 'disconnect', () => this.isServerConnected = false );
+        },
+        computed: {
+            /**
+             * @summary return proper logo based on muted value
+             */
+            logoIsMuted() {
+                const user = _.find( this.getUsersList, user => user._id == this.currentUser );
+                return user && user.status.muted ?
+                        '/static/img/logo/kozette_large_nosound.png' :
+                        '/static/img/logo/kozette_large_transparent.png';
+            }
         },
         methods: {
             /**
@@ -67,8 +56,8 @@
             logout()
             {
                 feathers_socket.logout();
-                clearInterval( this.interval );
                 this.logoutCurrentUser();
+                this.$router.go( { name: 'login' } );
             }
         }
     };

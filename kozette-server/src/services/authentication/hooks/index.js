@@ -1,11 +1,7 @@
 'use strict';
 
-const myDebugHook = function ( hook ) {
-    console.log( hook );
-};
-
 exports.before = {
-    all: [ myDebugHook ],
+    all: [],
     find: [],
     get: [],
     create: [],

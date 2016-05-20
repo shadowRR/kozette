@@ -37,10 +37,27 @@
     import PinnedMessagesList from './Sidebar/PinnedMessagesList.vue';
     // lib
     import Split from 'split.js';
+    // feathers
+    import {feathers_socket} from '../services';
+    // vuex
+    import {currentUser} from '../vuex/currentUser_getters';
+    import {loginCurrentUser} from '../vuex/currentUser_actions';
 
     export default {
         components: { Controls, UsersList, PinnedMessagesList },
+        vuex: {
+            getters: { currentUser },
+            actions: { loginCurrentUser }
+        },
         ready() {
+
+            // attempt reconnect if not connected
+            if ( !this.currentUser ) {
+                feathers_socket.authenticate()
+                        .then( user => this.loginCurrentUser( user ) )
+                        .catch( () => this.$router.go( { name: 'login' } ) );
+            }
+
             Split( [ '#content', '#sidebar' ], {
                 sizes: [ 85, 15 ],
                 minSize: [ 400, 200 ],
