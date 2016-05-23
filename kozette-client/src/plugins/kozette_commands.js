@@ -68,7 +68,7 @@ export default {
                 currentUserId,
                 { 'status.message': text },
                 err => {
-                    if ( err ) console.error( err );
+                    if ( err ) console.error( err )
                 }
             );
             return;

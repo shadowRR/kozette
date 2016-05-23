@@ -38,25 +38,45 @@
     // lib
     import Split from 'split.js';
     // feathers
-    import {feathers_socket} from '../services';
+    import { feathers_socket } from '../services';
     // vuex
-    import {currentUser} from '../vuex/currentUser_getters';
-    import {loginCurrentUser} from '../vuex/currentUser_actions';
+    import { currentUser } from '../vuex/currentUser_getters';
+    import { loginCurrentUser } from '../vuex/currentUser_actions';
+    import { serverConnectionChange } from '../vuex/isServerConnected_actions';
 
     export default {
         components: { Controls, UsersList, PinnedMessagesList },
         vuex: {
             getters: { currentUser },
-            actions: { loginCurrentUser }
+            actions: { loginCurrentUser, serverConnectionChange }
+        },
+        created() {
+            // auth the current user
+            const authenticate = () => {
+                feathers_socket.authenticate()
+                        .then( user => this.loginCurrentUser( user, feathers_socket.io.id ) )
+                        .catch( () => this.$router.go( { name: 'login' } ) );
+            };
+
+            // if not connected, authenticate
+            // (mainly triggered when user is reloading the page)
+            if ( !this.currentUser )
+                authenticate();
+
+            // catch events on disconnect and reconnect for
+            // the websockets connection, so we can show the
+            // actual socket status and re-authenticate the user
+            // if needed
+            feathers_socket.io
+                    .on( 'reconnect', () => {
+                        this.serverConnectionChange( true );
+                        authenticate();
+                    } )
+                    .on( 'disconnect', () => {
+                        this.serverConnectionChange( false );
+                    } );
         },
         ready() {
-
-            // attempt reconnect if not connected
-            if ( !this.currentUser ) {
-                feathers_socket.authenticate()
-                        .then( user => this.loginCurrentUser( user ) )
-                        .catch( () => this.$router.go( { name: 'login' } ) );
-            }
 
             Split( [ '#content', '#sidebar' ], {
                 sizes: [ 85, 15 ],

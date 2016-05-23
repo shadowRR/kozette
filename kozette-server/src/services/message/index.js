@@ -29,4 +29,12 @@ module.exports = function () {
 
     // Set up our after hooks
     messageService.after( hooks.after );
+
+    // Set up our filters
+    messageService.filter( ( data, connection ) => {
+        if ( !connection.user ) {
+            return false;
+        }
+        return data;
+    } );
 };

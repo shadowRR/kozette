@@ -42,8 +42,8 @@
             login() {
                 // authenticate
                 feathers_socket.authenticate( { type: 'token', email: this.email, password: this.password } )
-                        .then( ( result ) => {
-                            this.loginCurrentUser( result );
+                        .then( ( user ) => {
+                            this.loginCurrentUser( user, feathers_socket.io.id );
                             this.$router.go( { name: 'app' } );
                         } )
                         .catch( err => console.error( err ) );

@@ -9,9 +9,9 @@ const userSchema = new Schema( {
     roles: { type: Array, default: [ 'user' ], required: true },
     status: {
         online: { type: Boolean, default: false, required: true },
+        lastSeen: Date,
         message: String,
-        muted: { type: Boolean, default: false },
-        lastSeen: Date
+        muted: { type: Boolean, default: false }
     }
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } } );
 

@@ -11,10 +11,10 @@ module.exports = function () {
     app.configure( authentication( config ) );
 
     const tokenService = app.service( '/auth/token' );
-    
-    // setup before and after hooks
+
+    // setup before hooks
     tokenService.before( hooks.before );
-    
+
+    // setup after hooks
     tokenService.after( hooks.after );
-    
 };

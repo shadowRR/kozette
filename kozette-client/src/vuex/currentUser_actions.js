@@ -1,3 +1,5 @@
+'use strict';
+
 export const loginCurrentUser = function ( { dispatch }, user ) {
     // persist in state the currently logged in user
     dispatch( 'LOGIN_USER', user );

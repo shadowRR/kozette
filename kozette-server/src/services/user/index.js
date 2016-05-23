@@ -29,4 +29,17 @@ module.exports = function () {
 
     // Set up our after hooks
     userService.after( hooks.after );
+
+    // setup filters
+    userService.filter( ( data, connection ) => {
+        if ( !connection.user ) {
+            return false;
+        }
+        return data;
+    } );
+
+    // fixtures
+    // userModel.update( {}, { 'status.socketIds': [] }, { multi: true } )
+    //     .then( () => console.log( 'reset of socket ids is finished' ) )
+    //     .catch( err => console.error( err ) );
 };

@@ -11,7 +11,7 @@ const hooks = require( 'feathers-hooks' );
 const socketio = require( 'feathers-socketio' );
 const middleware = require( './middleware' );
 const services = require( './services' );
-const sockethandler = require( './middleware/socket-handler' );
+const plugins = require( './plugins' );
 
 const app = feathers();
 
@@ -27,7 +27,8 @@ if ( process.env.NODE_ENV === 'production' ) {
         .configure( hooks() )
         .configure( socketio() )
         .configure( services )
-        .configure( middleware );
+        .configure( middleware )
+        .configure( plugins );
 }
 else {
     app
@@ -35,9 +36,10 @@ else {
         .options( '*', cors() )
         .use( cors() )
         .configure( hooks() )
-        .configure( socketio( sockethandler() ) )
+        .configure( socketio() )
         .configure( services )
-        .configure( middleware );
+        .configure( middleware )
+        .configure( plugins );
 }
 
 module.exports = app;

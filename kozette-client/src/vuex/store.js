@@ -6,6 +6,7 @@ import _ from 'lodash';
 Vue.use( Vuex );
 
 const state = {
+    isServerConnected: true,
     currentUser: false,
     users: [],
     messages: [],
@@ -13,6 +14,10 @@ const state = {
 };
 
 const mutations = {
+
+    SERVER_CONNECTION_CHANGE( state, value ) {
+        state.isServerConnected = value;
+    },
 
     LOGIN_USER( state, user ) {
         state.currentUser = user.data._id;

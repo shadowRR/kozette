@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-import {messageService} from '../services';
+import { messageService } from '../services';
 
 export const fetchMessages = function ( { dispatch } ) {
     // get the messages list from feathers websockets
@@ -28,11 +28,12 @@ export const addMessage = function ( { dispatch, state } ) {
             Notification.requestPermission( () => {
                 // get the user for this message
                 const user = _.find( state.users, { _id: message.user_id } );
-                new Notification(
+                const n = new Notification(
                     `New message from ${user.nickname || user.email}`, {
                         body: message.text,
                         icon: '/static/logo/mobile/logo_256.png'
                     } );
+                setTimeout( () => n.close(), 1000 * 5 );
             } );
         }
 
