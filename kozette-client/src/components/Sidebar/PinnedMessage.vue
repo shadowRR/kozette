@@ -52,7 +52,7 @@
              * @returns {boolean}
              */
             owner() {
-                return this.currentUser.data._id === this.message.user_id;
+                return this.currentUser === this.message.user_id;
             },
             /**
              * @summary get the color of the owner of
