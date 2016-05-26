@@ -7,10 +7,10 @@
 
 <script type="text/babel">
 
-    import {currentUser} from '../../vuex/currentUser_getters';
-    import {getUsersList} from '../../vuex/users_getters.js';
+    import { currentUser } from '../../vuex/currentUser_getters';
+    import { getUsersList } from '../../vuex/users_getters.js';
     import Commands from '../../plugins/kozette_commands';
-    import {messageService} from '../../services';
+    import { messageService } from '../../services';
 
     export default {
         data() {
@@ -31,7 +31,7 @@
                 const usernames = this.users.map( user => user.nickname || user.email );
                 const commands = [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ];
                 $( '.input-message' )
-                        .atwho( { at: '@', data: usernames } )
+                        .atwho( { at: '@', data: usernames, insertTpl: "${name}" } )
                         .atwho( { at: '/', data: commands, insertTpl: "${name}", limit: 30 } );
             } );
         },

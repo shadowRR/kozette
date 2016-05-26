@@ -5,9 +5,18 @@ import { messageService } from '../services';
 
 export const fetchMessages = function ( { dispatch } ) {
     // get the messages list from feathers websockets
-    messageService.find( { query: { $sort: { created_at: -1 } } } )
+    messageService.find( { query: { $sort: { created_at: -1 }, $limit: 200 } } )
         .then( messages => {
             dispatch( 'FETCH_MESSAGES', messages.data );
+        } );
+};
+
+export const fetchMoreMessages = function ( { dispatch, state } ) {
+    // first, get how many message we already have
+    const messageCount = state.messages.length;
+    messageService.find( { query: { $sort: { created_at: -1 }, $skip: messageCount } } )
+        .then( messages => {
+            messages.data.forEach( message => dispatch( 'ADD_MESSAGE', message ) );
         } );
 };
 

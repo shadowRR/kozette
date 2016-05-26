@@ -2,6 +2,7 @@
 
     <!-- chat -->
     <section v-on:scroll="isScrolling" id="message-list" class="split">
+        <div v-if="isLoading">Loading...</div>
         <message-list></message-list>
     </section>
     <!-- input message -->
@@ -18,6 +19,8 @@
     // components
     import MessageList from './MessageList.vue';
     import InputMessage from './InputMessage.vue';
+    // vuex
+    import { fetchMoreMessages } from '../../vuex/messages_actions';
 
     /**
      * @summary scroll to bottom of the message list
@@ -33,6 +36,9 @@
             return {
                 autoScrollingActive: true
             }
+        },
+        vuex: {
+            actions: { fetchMoreMessages }
         },
         ready() {
             // split message list and input message
@@ -58,12 +64,18 @@
              */
             isScrolling() {
                 const how_close = 80,  // pixels leeway to be considered "at Bottom"
-                        message_list = $( "#message-list" ),
+                        message_list = $( '#message-list' ),
                         scroll_height = message_list.prop( "scrollHeight" ),
                         scroll_bottom = message_list.prop( "scrollTop" ) + message_list.height();
                 // set the autoScrolling boolean depending on if we are
                 // close enough from the bottom of the message list
                 this.autoScrollingActive = scroll_bottom > (scroll_height - how_close);
+
+                // now check if we are on top on the message list, so we can load
+                // more message for history purpose
+                const pos = message_list.prop( "scrollTop" );
+                if ( pos == 0 )
+                    this.fetchMoreMessages();
             }
         }
     }

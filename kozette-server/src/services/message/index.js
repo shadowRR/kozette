@@ -13,7 +13,7 @@ module.exports = function () {
     let options = {
         Model: messageModel,
         paginate: {
-            default: 200,
+            default: 50,
             max: 200
         }
     };
