@@ -43,12 +43,13 @@
     import { currentUser } from '../vuex/currentUser_getters';
     import { loginCurrentUser } from '../vuex/currentUser_actions';
     import { serverConnectionChange } from '../vuex/isServerConnected_actions';
+    import { windowFocusChange } from '../vuex/windowFocus_actions';
 
     export default {
         components: { Controls, UsersList, PinnedMessagesList },
         vuex: {
             getters: { currentUser },
-            actions: { loginCurrentUser, serverConnectionChange }
+            actions: { loginCurrentUser, serverConnectionChange, windowFocusChange }
         },
         created() {
             // auth the current user
@@ -90,6 +91,15 @@
                 sizes: [ 75, 25 ],
                 gutterSize: 8,
                 cursor: 'row-resize'
+            } );
+
+            // to know if page is focused or not i
+            // the entire application
+            $( window ).on( 'focus blur mousemove', ( e ) => {
+                // set the proper window focus based
+                // on the actual focus state
+                this.windowFocusChange( e.type != 'blur' );
+
             } );
         }
     }

@@ -27,11 +27,11 @@ export const addMessage = function ( { dispatch, state } ) {
         //
         // so first, get the current user data
         const loggedUser = _.find( state.users, user => user._id == state.currentUser );
-        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted )
+        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted && !state.windowFocused )
             $( '#audio-kozette-message' )[ 0 ].play();
 
         // show notifications if available and permitted
-        if ( (state.currentUser != message.user_id) &&
+        if ( (state.currentUser != message.user_id) && !state.windowFocused &&
             window.Notification && Notification.permission !== 'denied' ) {
             // request perm, and if accepted, show
             Notification.requestPermission( () => {
@@ -40,7 +40,7 @@ export const addMessage = function ( { dispatch, state } ) {
                 const n = new Notification(
                     `New message from ${user.nickname || user.email}`, {
                         body: message.text,
-                        icon: '/static/logo/mobile/logo_256.png'
+                        icon: '/static/img/logo/mobile/logo_256.png'
                     } );
                 setTimeout( () => n.close(), 1000 * 5 );
             } );

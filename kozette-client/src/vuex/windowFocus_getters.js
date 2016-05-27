@@ -4,4 +4,4 @@
  * @summary get the current user if exist
  * @param state
  */
-export const isServerConnected = state => state.isServerConnected;
+export const isWindowFocused = state => state.windowFocused;

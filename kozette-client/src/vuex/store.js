@@ -7,6 +7,7 @@ Vue.use( Vuex );
 
 const state = {
     isServerConnected: true,
+    windowFocused: true,
     currentUser: false,
     users: [],
     messages: [],
@@ -17,6 +18,10 @@ const mutations = {
 
     SERVER_CONNECTION_CHANGE( state, value ) {
         state.isServerConnected = value;
+    },
+
+    WINDOW_FOCUS( state, value ) {
+        state.windowFocused = value;
     },
 
     LOGIN_USER( state, user ) {
