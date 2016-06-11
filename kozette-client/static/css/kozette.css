@@ -244,3 +244,9 @@ button:hover, a:hover {
 	background: #0096c1;
 	border: none;
 }
+
+.ejs-video-preview {
+	padding: 5px;
+	border: none;
+	background-color: #052933;
+}

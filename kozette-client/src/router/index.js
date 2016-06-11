@@ -8,7 +8,7 @@ import Login from '../components/Login/Login.vue';
 import App from '../components/App.vue';
 import Chat from '../components/Chat/Chat.vue';
 // server
-import {feathers_socket} from '../services';
+import { feathers_socket } from '../services';
 
 Vue.use( VueRouter );
 const router = new VueRouter();
