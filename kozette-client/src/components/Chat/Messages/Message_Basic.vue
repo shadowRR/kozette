@@ -38,6 +38,7 @@
                 input: this.message.text,
                 marked: true,
                 highlightCode: true,
+                emoji: false,
                 inlineEmbed: 'all',
                 googleAuthKey: 'AIzaSyATK9E2VieJbQGX-D4jwA2WDDYPpwlyS6s',
                 plugins: {
