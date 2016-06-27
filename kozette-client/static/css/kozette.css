@@ -250,3 +250,7 @@ button:hover, a:hover {
 	border: none;
 	background-color: #052933;
 }
+
+.ejs-image {
+	max-width: 300px;
+}
