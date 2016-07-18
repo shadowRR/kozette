@@ -49,6 +49,7 @@ blockquote {
 	border-left: 3px solid white;
 	padding-left: 10px;
 	margin: 0;
+	font-style: italic;
 }
 
 #login-box {
