@@ -45,6 +45,12 @@ code {
 	padding: 10px;
 }
 
+blockquote {
+	border-left: 3px solid white;
+	padding-left: 10px;
+	margin: 0;
+}
+
 #login-box {
 	width: 400px;
 	text-align: center;
