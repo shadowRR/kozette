@@ -52,6 +52,15 @@ blockquote {
 	font-style: italic;
 }
 
+ul {
+	margin: 0;
+	padding-left: 1em
+}
+
+li {
+	list-style-type: square;
+}
+
 #login-box {
 	width: 400px;
 	text-align: center;
