@@ -80,7 +80,7 @@
              */
             highlightUsername( text ) {
                // HighLights
-               if ( !this.currentUser != this.message.user_id ) {
+               if ( this.currentUser != this.message.user_id ) {
 
                    // get currentUser username
                    const user = _.find( this.getUsersList, user => user._id == this.currentUser );
@@ -97,7 +97,7 @@
                                    user_string = `<span style="color: ${color}; border-bottom: 1px solid ${color};">${name_split[ 1 ]}</span>`;
                            text = text.replace( reg, user_string );
                        }
-                       
+
                    }
                }
                return text;
