@@ -40,7 +40,7 @@
         },
 
         ready() {
-            
+            this.embedAndMarkdown();
         },
 
         computed: {
