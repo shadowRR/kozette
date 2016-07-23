@@ -55,7 +55,7 @@
 
         },
 
-        method: {
+        methods: {
 
             /**
              * @summary embed links and convert markdown
