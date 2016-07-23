@@ -43,7 +43,7 @@ export default {
         if ( meRegEx.test( command ) ) {
             //let message = new Message();
             const text = command.substring( command.indexOf( ' ' ) + 1 );
-            messageService.create( { text: this.inputMessage, type: 'me' } )
+            services.messageService.create( { text: this.inputMessage, type: 'me' } )
                 .catch( err => console.error( err ) );
             return;
         }
