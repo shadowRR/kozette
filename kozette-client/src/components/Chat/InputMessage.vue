@@ -13,17 +13,22 @@
     import { messageService } from '../../services';
 
     export default {
+
         data() {
             return {
                 inputMessage: ''
             }
         },
+
         vuex: {
+
             getters: {
                 currentUser,
                 users: getUsersList
             }
+
         },
+
         ready() {
             // watch for changes in the users list and
             // update accordingly the @mentions system
@@ -35,7 +40,9 @@
                         .atwho( { at: '/', data: commands, insertTpl: "${name}", limit: 30 } );
             } );
         },
+
         methods: {
+
             /**
              * @summary send a new message
              * @param e
@@ -57,13 +64,14 @@
                             Commands.executeCommand( text, this.currentUser ) :
                             // otherwise, normal behavior, add the message
                             messageService.create( { text: this.inputMessage } )
-                                    .catch( err => console.error( err ) );
+                                .catch( err => console.error( err ) );
 
                     // in any case, empty the message input
                     this.inputMessage = '';
                 }
 
             }
+
         }
     }
 

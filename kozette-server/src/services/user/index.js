@@ -10,7 +10,7 @@ module.exports = function () {
 
     // service options with the mongoose
     // model for users
-    let options = {
+    let options = { 
         Model: userModel,
         paginate: {
             default: 5,
@@ -18,28 +18,14 @@ module.exports = function () {
         }
     };
 
-    // Initialize our service with any options it requires
+    // init
     app.use( '/users', service( options ) );
-
-    // Get our initialize service to that we can bind hooks
     const userService = app.service( '/users' );
 
-    // Set up our before hooks
+    // hooks
     userService.before( hooks.before );
-
-    // Set up our after hooks
     userService.after( hooks.after );
 
-    // setup filters
-    userService.filter( ( data, connection ) => {
-        if ( !connection.user ) {
-            return false;
-        }
-        return data;
-    } );
-
-    // fixtures
-    // userModel.update( {}, { 'status.socketIds': [] }, { multi: true } )
-    //     .then( () => console.log( 'reset of socket ids is finished' ) )
-    //     .catch( err => console.error( err ) );
+    // filters
+    userService.filter( ( data, connection ) => !connection.user ? false : data );
 };

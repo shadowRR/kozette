@@ -7,9 +7,7 @@ const hooks = require( './hooks' );
 
 module.exports = function () {
     const app = this;
-
-    // service options with the mongoose
-    // model for messages
+    
     let options = {
         Model: messageModel,
         paginate: {
@@ -18,23 +16,14 @@ module.exports = function () {
         }
     };
 
-    // Initialize our service with any options it requires
+    // init
     app.use( '/messages', service( options ) );
-
-    // Get our initialize service to that we can bind hooks
     const messageService = app.service( '/messages' );
 
-    // Set up our before hooks
+    // hooks
     messageService.before( hooks.before );
-
-    // Set up our after hooks
     messageService.after( hooks.after );
 
-    // Set up our filters
-    messageService.filter( ( data, connection ) => {
-        if ( !connection.user ) {
-            return false;
-        }
-        return data;
-    } );
+    // filters
+    userService.filter( ( data, connection ) => !connection.user ? false : data );
 };

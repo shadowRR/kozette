@@ -19,16 +19,21 @@
     import {fetchUsers, addUser, updateAndPatchUser} from '../../vuex/users_actions.js';
 
     export default {
+
         vuex: {
+
             getters: {
                 users: getUsersList
             },
+
             actions: {
                 fetchUsers,
                 addUser,
                 updateAndPatchUser
             }
+
         },
+
         created() {
             // trigger watch on each dispatch available
             // for the users list
@@ -36,6 +41,7 @@
             this.addUser();
             this.updateAndPatchUser();
         }
+        
     }
 
 </script>

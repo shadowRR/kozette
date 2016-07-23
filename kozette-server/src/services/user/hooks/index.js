@@ -31,15 +31,14 @@ exports.before = {
         auth.restrictToOwner( { ownerField: '_id' } )
     ],
     remove: [
-        auth.verifyToken(),
-        auth.populateUser(),
-        auth.restrictToAuthenticated(),
-        auth.restrictToOwner( { ownerField: '_id' } )
+        hooks.disable()
     ]
 };
 
 exports.after = {
-    all: [ hooks.remove( 'password' ) ],
+    all: [ 
+        hooks.remove( 'password' ) 
+    ],
     find: [],
     get: [],
     create: [],

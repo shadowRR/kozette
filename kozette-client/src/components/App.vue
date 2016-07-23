@@ -55,7 +55,10 @@
             // auth the current user
             const authenticate = () => {
                 feathers_socket.authenticate()
-                        .then( user => this.loginCurrentUser( user, feathers_socket.io.id ) )
+                        .then( user => {
+                            this.loginCurrentUser( user );
+                            
+                        } )
                         .catch( () => this.$router.go( { name: 'login' } ) );
             };
 

@@ -25,15 +25,21 @@
     import { isServerConnected } from '../../vuex/isServerConnected_getters';
 
     export default {
+
         data() {
             return {
                 interval: false
             }
         },
+
         vuex: {
+
             getters: { currentUser, getUsersList, isServerConnected },
+
             actions: { logoutCurrentUser, loginCurrentUser }
+
         },
+
         ready() {
             // patch user online status and
             const patchUser = () => {
@@ -51,7 +57,9 @@
             // set the interval every minutes
             this.interval = setInterval( () => patchUser(), 1000 * 10 );
         },
+
         computed: {
+
             /**
              * @summary return proper logo based on muted value
              */
@@ -61,13 +69,15 @@
                         '/static/img/logo/kozette_large_nosound.png' :
                         '/static/img/logo/kozette_large_transparent.png';
             }
+
         },
+
         methods: {
+
             /**
              * @summary logout the user
              */
-            logout()
-            {
+            logout() {
                 // logout from feathers token
                 feathers_socket.logout();
                 // reset state
@@ -76,7 +86,9 @@
                 clearInterval( this.interval );
                 this.$router.go( { name: 'login' } );
             }
+            
         }
+        
     };
 
 </script>

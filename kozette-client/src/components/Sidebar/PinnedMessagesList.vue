@@ -16,17 +16,23 @@
     import PinnedMessage from './PinnedMessage.vue';
 
     export default {
+
         components: { PinnedMessage },
+
         vuex: {
+
             getters: {
                 pinnedMessages: getPinnedMessageList
             },
+
             actions: {
                 fetchPinnedMessages,
                 addPinnedMessages,
                 removePinnedMessages
             }
+
         },
+
         ready() {
             // trigger watch on each dispatch available for
             // the pinned messages list
@@ -34,6 +40,7 @@
             this.addPinnedMessages();
             this.removePinnedMessages();
         }
+        
     }
 
 </script>

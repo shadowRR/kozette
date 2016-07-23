@@ -19,23 +19,30 @@
 <script type="text/babel">
 
     // services
-    import {feathers_socket, userService} from '../../services';
+    import { feathers_socket, userService } from '../../services';
     // vuex
-    import {loginCurrentUser} from '../../vuex/currentUser_actions';
-    import {currentUser} from '../../vuex/currentUser_getters';
+    import { loginCurrentUser } from '../../vuex/currentUser_actions';
+    import { currentUser } from '../../vuex/currentUser_getters';
 
     export default {
+
         data() {
             return {
                 email: '',
                 password: ''
             };
         },
+
         vuex: {
+
             getters: { currentUser },
+
             actions: { loginCurrentUser }
+
         },
+
         methods: {
+
             /**
              * @summary login in
              */
@@ -48,6 +55,7 @@
                         } )
                         .catch( err => console.error( err ) );
             },
+
             /**
              * @summary register a new user
              */
@@ -61,6 +69,9 @@
                         } )
                         .catch( err => console.error( err ) );
             }
+
         }
+
     }
+
 </script>
