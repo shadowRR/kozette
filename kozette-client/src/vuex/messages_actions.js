@@ -31,7 +31,7 @@ export const addMessage = function ( { dispatch, state } ) {
             $( '#audio-kozette-message' )[ 0 ].play();
 
         // show notifications if available and permitted
-        if ( (state.currentUser != message.user_id) && !state.windowFocused &&
+        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted && !state.windowFocused &&
             window.Notification && Notification.permission !== 'denied' ) {
             // request perm, and if accepted, show
             Notification.requestPermission( () => {

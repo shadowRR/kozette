@@ -3,7 +3,8 @@
     <span class="message-date">[{{getTime}}]</span>
     <span class="username"
           v-bind:style="{color: message.user.color}">{{message.user.nickname || message.user.email}}</span>
-    <span v-bind:id="message._id" class="message-content">{{{embedText}}}</span>
+    <span v-bind:id="message._id" v-bind:style="{color: message.type == 'me' && message.user.color}" 
+        class="message-content">{{{embedText}}}</span>
 
 </template>
 

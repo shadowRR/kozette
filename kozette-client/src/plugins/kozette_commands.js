@@ -24,12 +24,8 @@ export default {
         const nickRegEx = /^\/nick\b/;
         if ( nickRegEx.test( command ) ) {
             const nickname = command.substring( command.indexOf( ' ' ) + 1 );
-            services.userService.patch(
-                currentUserId,
-                { nickname },
-                err => {
-                    if ( err ) console.error( err );
-                } );
+            services.userService.patch( currentUserId, { nickname } )
+                .catch( err => console.error( err ) );
             return;
         }
 
@@ -37,13 +33,8 @@ export default {
         const colorRegEx = /^\/color\b/;
         if ( colorRegEx.test( command ) ) {
             const color = command.substring( command.indexOf( ' ' ) + 1 );
-            services.userService.patch(
-                currentUserId,
-                { color },
-                err => {
-                    if ( err ) console.error( err );
-                }
-            );
+            services.userService.patch( currentUserId, { color } )
+                .catch( err => console.error( err ) );
             return;
         }
 
@@ -52,10 +43,8 @@ export default {
         if ( meRegEx.test( command ) ) {
             //let message = new Message();
             const text = command.substring( command.indexOf( ' ' ) + 1 );
-            //message.set( { user_id: Meteor.userId(), message: text, type: 'info' } );
-            // message.validate() && Meteor.call( 'message.insert', message, ( err ) => {
-            //     if ( err )console.log( err );
-            // } );
+            messageService.create( { text: this.inputMessage, type: 'me' } )
+                .catch( err => console.error( err ) );
             return;
         }
 
@@ -64,13 +53,8 @@ export default {
         if ( statusRegEx.test( command ) ) {
             let text = '';
             if ( command.indexOf( ' ' ) > -1 ) text = command.substring( command.indexOf( ' ' ) + 1 );
-            services.userService.patch(
-                currentUserId,
-                { 'status.message': text },
-                err => {
-                    if ( err ) console.error( err )
-                }
-            );
+            services.userService.patch( currentUserId, { 'status.message': text } )
+                .catch( err => console.error( err ) );
             return;
         }
 
@@ -86,25 +70,15 @@ export default {
         // for the mute command
         const muteRegEx = /^\/mute\b/;
         if ( muteRegEx.test( command ) ) {
-            services.userService.patch(
-                currentUserId,
-                { 'status.muted': true },
-                err => {
-                    if ( err ) console.log( err );
-                }
-            );
+            services.userService.patch( currentUserId, { 'status.muted': true } )
+                .catch( err => console.error( err ) );
         }
 
         // for the unmute command
         const unmuteRegEx = /^\/unmute\b/;
         if ( unmuteRegEx.test( command ) ) {
-            services.userService.patch(
-                currentUserId,
-                { 'status.muted': false },
-                err => {
-                    if ( err ) console.log( err );
-                }
-            );
+            services.userService.patch( currentUserId, { 'status.muted': false } )
+                .catch( err => console.error( err ) );
         }
 
     }
