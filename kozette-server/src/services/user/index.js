@@ -13,8 +13,8 @@ module.exports = function () {
     let options = { 
         Model: userModel,
         paginate: {
-            default: 5,
-            max: 25
+            default: 25,
+            max: 100
         }
     };
 

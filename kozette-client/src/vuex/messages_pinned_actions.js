@@ -1,3 +1,5 @@
+'use strict'l
+
 import {messageService} from '../services';
 
 export const fetchPinnedMessages = function ( { dispatch } ) {

@@ -1,4 +1,4 @@
-/**/
+'use strict';
 
 import feathers from 'feathers/client';
 import hooks from 'feathers-hooks';

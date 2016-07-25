@@ -1,3 +1,5 @@
+'use strict';
+
 import { userService } from '../services';
 
 export const fetchUsers = function ( { dispatch } ) {

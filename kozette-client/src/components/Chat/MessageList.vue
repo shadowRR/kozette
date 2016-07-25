@@ -18,14 +18,9 @@
 
         vuex: {
 
-            getters: {
-                messages: getMessagesList
-            },
+            getters: { messages: getMessagesList },
 
-            actions: {
-                fetchMessages,
-                addMessage
-            }
+            actions: { fetchMessages, addMessage }
             
         },
 

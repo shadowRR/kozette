@@ -1,5 +1,6 @@
 'use strict';
 
+const errors = require( 'feathers-errors' );
 const moment = require( 'moment' );
 
 /**
@@ -24,7 +25,7 @@ module.exports = function () {
                 // update each found user has offline
                 result.data.forEach( user => {
                     users.patch( user._id, { 'status.online': false } )
-                        .catch( err => console.error( err ) );
+                        .catch( err => errors.BadRequest( err ) );
             } );
         } );
 

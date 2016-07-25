@@ -1,5 +1,6 @@
 <template>
 
+    <!-- audio -->
     <audio id="audio-kozette-connection" preload="auto">
         <source src="/static/sounds/kozette_connection.mp3" type="audio/mp3">
     </audio>
@@ -11,20 +12,25 @@
         <source src="/static/sounds/kozette_message.ogg" type="audio/ogg">
     </audio>
 
+    <!-- chat -->
     <main id="content" class="split split-horizontal">
         <router-view></router-view>
     </main>
 
+    <!-- sidebar -->
     <aside id="sidebar" class="split split-horizontal">
-        <!-- sidebar -->
+
+        <!-- nav -->
         <section id="nav" class="split">
             <controls></controls>
             <users-list></users-list>
         </section>
+
         <!-- pinned -->
         <section id="pinned" class="split">
             <pinned-messages-list></pinned-messages-list>
         </section>
+
     </aside>
 
 </template>
@@ -44,22 +50,29 @@
     import { loginCurrentUser } from '../vuex/currentUser_actions';
     import { serverConnectionChange } from '../vuex/isServerConnected_actions';
     import { windowFocusChange } from '../vuex/windowFocus_actions';
+    import { fetchMessages } from '../../vuex/messages_actions.js';
 
     export default {
+
         components: { Controls, UsersList, PinnedMessagesList },
+
         vuex: {
+
             getters: { currentUser },
-            actions: { loginCurrentUser, serverConnectionChange, windowFocusChange }
+
+            actions: { loginCurrentUser, serverConnectionChange, windowFocusChange, fetchMessages }
+
         },
+
         created() {
             // auth the current user
             const authenticate = () => {
                 feathers_socket.authenticate()
-                        .then( user => {
-                            this.loginCurrentUser( user );
-                            
-                        } )
-                        .catch( () => this.$router.go( { name: 'login' } ) );
+                    .then( user => {
+                        this.loginCurrentUser( user );
+                        this.fetchMessages();
+                    } )
+                    .catch( () => this.$router.go( { name: 'login' } ) );
             };
 
             // if not connected, authenticate
@@ -72,14 +85,15 @@
             // actual socket status and re-authenticate the user
             // if needed
             feathers_socket.io
-                    .on( 'reconnect', () => {
-                        this.serverConnectionChange( true );
-                        authenticate();
-                    } )
-                    .on( 'disconnect', () => {
-                        this.serverConnectionChange( false );
-                    } );
+                .on( 'reconnect', () => {
+                    this.serverConnectionChange( true );
+                    authenticate();
+                } )
+                .on( 'disconnect', () => {
+                    this.serverConnectionChange( false );
+                } );
         },
+
         ready() {
 
             Split( [ '#content', '#sidebar' ], {
@@ -105,6 +119,7 @@
 
             } );
         }
+        
     }
 
 </script>

@@ -22,14 +22,6 @@
     // vuex
     import { fetchMoreMessages } from '../../vuex/messages_actions';
 
-    /**
-     * @summary scroll to bottom of the message list
-     */
-    const scrollToBottom = () => {
-        const last_message = $( '.message-item' ).last()[ 0 ];
-        last_message && last_message.scrollIntoView();
-    };
-
     export default {
 
         components: { MessageList, InputMessage },
@@ -57,10 +49,10 @@
             } );
 
             // scroll on load the first time
-            scrollToBottom();
+            this.scrollToBottom();
             // interval for autoScrolling behavior
             setInterval( () => {
-                this.autoScrollingActive && scrollToBottom();
+                this.autoScrollingActive && this.scrollToBottom();
             }, 1000 );
 
         },
@@ -77,12 +69,20 @@
                     scroll_bottom = message_list.prop( "scrollTop" ) + message_list.height();
                 // set the autoScrolling boolean depending on if we are
                 // close enough from the bottom of the message list
-                this.autoScrollingActive = scroll_bottom > (scroll_height - how_close);
+                this.autoScrollingActive = scroll_bottom > ( scroll_height - how_close );
 
                 // now check if we are on top on the message list, so we can load
                 // more message for history purpose
                 const pos = message_list.prop( "scrollTop" );
                 if ( pos == 0 ) this.fetchMoreMessages();
+            },
+
+            /**
+             * @summary scroll to bottom of the message list
+             */
+            scrollToBottom() {
+                const last_message = $( '.message-item' ).last()[ 0 ];
+                last_message && last_message.scrollIntoView();
             }
 
         }

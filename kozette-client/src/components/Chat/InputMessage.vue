@@ -53,6 +53,8 @@
                 // if user isn't trying to just add a newline
                 if ( !e.shiftKey && !e.ctrlKey ) {
 
+                    e.preventDefault();
+
                     const text = this.inputMessage.trim();
 
                     // if empty message, stop here

@@ -27,11 +27,11 @@ export const addMessage = function ( { dispatch, state } ) {
         //
         // so first, get the current user data
         const loggedUser = _.find( state.users, user => user._id == state.currentUser );
-        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted && !state.windowFocused )
+        if ( ( state.currentUser != message.user_id ) && !loggedUser.status.muted && !state.windowFocused )
             $( '#audio-kozette-message' )[ 0 ].play();
 
         // show notifications if available and permitted
-        if ( (state.currentUser != message.user_id) && !loggedUser.status.muted && !state.windowFocused &&
+        if ( ( state.currentUser != message.user_id ) && !loggedUser.status.muted && !state.windowFocused &&
             window.Notification && Notification.permission !== 'denied' ) {
             // request perm, and if accepted, show
             Notification.requestPermission( () => {

@@ -1,3 +1,5 @@
+'use strict'l
+
 /**
  * @summary get the current user if exist
  * @param state

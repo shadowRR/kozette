@@ -1,3 +1,5 @@
+'use strict'l
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import _ from 'lodash';

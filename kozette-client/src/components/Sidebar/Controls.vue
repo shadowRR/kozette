@@ -2,11 +2,13 @@
 
     <img id="logo" v-bind:src="logoIsMuted" alt="logo kozette">
 
+    <!-- server -->
     <span class="oneliner">// Server -----------------------------------------------------------</span>
     Server :
     <span v-if="isServerConnected" class="green-text">connected</span>
     <span v-else class="red-text">offline</span>
 
+    <!-- account -->
     <span class="oneliner">// Account -----------------------------------------------------------</span>
     <a class="red-link" v-on:click="logout">[ Logout ]</a>
 
@@ -43,8 +45,7 @@
         ready() {
             // patch user online status and
             const patchUser = () => {
-                // online try to patch if connected
-                // to server
+                // only try to patch if connected to server
                 if ( feathers_socket.io.connected && this.currentUser )
                     userService.patch( this.currentUser, { 'status.online': true, 'status.lastSeen': new Date() } )
                             .catch( err => console.error( err ) );
