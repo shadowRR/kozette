@@ -25,5 +25,5 @@ module.exports = function () {
     messageService.after( hooks.after );
 
     // filters
-    userService.filter( ( data, connection ) => !connection.user ? false : data );
+    messageService.filter( ( data, connection ) => !connection.user ? false : data );
 };
