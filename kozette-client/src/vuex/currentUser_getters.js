@@ -1,4 +1,4 @@
-'use strict'l
+'use strict';
 
 /**
  * @summary get the current user if exist
