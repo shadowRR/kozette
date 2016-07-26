@@ -10,7 +10,7 @@
 
     import { fetchMessages, addMessage } from '../../vuex/messages_actions.js';
     import { getMessagesList } from '../../vuex/messages_getters';
-    import MessageBasic from './Message.vue';
+    import Message from './Message.vue';
 
     export default {
         
