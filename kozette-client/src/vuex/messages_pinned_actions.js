@@ -1,4 +1,4 @@
-'use strict'l
+'use strict';
 
 import {messageService} from '../services';
 
