@@ -50,7 +50,7 @@
     import { loginCurrentUser } from '../vuex/currentUser_actions';
     import { serverConnectionChange } from '../vuex/isServerConnected_actions';
     import { windowFocusChange } from '../vuex/windowFocus_actions';
-    import { fetchMessages } from '../../vuex/messages_actions.js';
+    import { fetchMessages } from '../vuex/messages_actions.js';
 
     export default {
 
