@@ -14,7 +14,7 @@ export const fetchMessages = function ( { dispatch } ) {
 export const fetchMoreMessages = function ( { dispatch, state } ) {
     // first, get how many message we already have
     const messageCount = state.messages.length;
-    messageService.find( { query: { $sort: { created_at: -1 }, $skip: messageCount } } )
+    messageService.find( { query: { $sort: { created_at: -1 }, $skip: messageCount, $limit: 25 } } )
         .then( messages => {
             messages.data.forEach( message => dispatch( 'ADD_MESSAGE', message ) );
         } );
