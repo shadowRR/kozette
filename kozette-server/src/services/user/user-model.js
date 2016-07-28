@@ -36,6 +36,10 @@ const userSchema = new Schema(
             muted: { 
                 type: Boolean, 
                 default: false 
+            },
+            notifications: {
+                type: Boolean,
+                default: true
             }
         }
     }, 

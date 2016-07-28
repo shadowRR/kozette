@@ -1,5 +1,7 @@
 'use strict';
 
+const handleRoles = require('./handleRoles');
+
 const hooks = require( 'feathers-hooks' );
 const auth = require( 'feathers-authentication' ).hooks;
 
@@ -16,19 +18,22 @@ exports.before = {
         auth.restrictToAuthenticated()
     ],
     create: [
-        auth.hashPassword()
+        auth.hashPassword(), 
+        handleRoles()
     ],
     update: [
         auth.verifyToken(),
         auth.populateUser(),
         auth.restrictToAuthenticated(),
-        auth.restrictToOwner( { ownerField: '_id' } )
+        auth.restrictToOwner( { ownerField: '_id' } ),
+        hook.remove( 'roles' )
     ],
     patch: [
         auth.verifyToken(),
         auth.populateUser(),
         auth.restrictToAuthenticated(),
-        auth.restrictToOwner( { ownerField: '_id' } )
+        auth.restrictToOwner( { ownerField: '_id' } ),
+        hook.remove( 'roles' )
     ],
     remove: [
         hooks.disable()
