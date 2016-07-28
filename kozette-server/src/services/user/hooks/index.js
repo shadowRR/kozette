@@ -26,14 +26,14 @@ exports.before = {
         auth.populateUser(),
         auth.restrictToAuthenticated(),
         auth.restrictToOwner( { ownerField: '_id' } ),
-        hook.remove( 'roles' )
+        hooks.remove( 'roles' )
     ],
     patch: [
         auth.verifyToken(),
         auth.populateUser(),
         auth.restrictToAuthenticated(),
         auth.restrictToOwner( { ownerField: '_id' } ),
-        hook.remove( 'roles' )
+        hooks.remove( 'roles' )
     ],
     remove: [
         hooks.disable()
