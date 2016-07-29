@@ -9,7 +9,7 @@ export default {
      * @return {Boolean}
      */
     isCommand( message ) {
-        const reg = /^\/(nick|color|me|status|pin|mute|unmute)\b/;
+        const reg = /^\/(nick|color|me|status|pin|mute|notify)\b/;
         return reg.test( message );
     },
     /**
@@ -67,17 +67,19 @@ export default {
             return;
         }
 
-        // for the mute command
+        // for the /mute command
         const muteRegEx = /^\/mute\b/;
         if ( muteRegEx.test( command ) ) {
-            services.userService.patch( currentUserId, { 'status.muted': true } )
+            let text = command.substring( command.indexOf( ' ' ) + 1 );
+            services.userService.patch( currentUserId, { 'status.muted': text != 'off' } )
                 .catch( err => console.error( err ) );
         }
 
-        // for the unmute command
-        const unmuteRegEx = /^\/unmute\b/;
-        if ( unmuteRegEx.test( command ) ) {
-            services.userService.patch( currentUserId, { 'status.muted': false } )
+        // for the /notify command
+        const notifyRegEx = /^\/notify\b/;
+        if ( notifyRegEx.test( command ) ) {
+            let text = command.substring( command.indexOf( ' ' ) + 1 );
+            services.userService.patch( currentUserId, { 'status.notifications': text != 'off' } )
                 .catch( err => console.error( err ) );
         }
 

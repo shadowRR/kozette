@@ -23,10 +23,10 @@ export const fetchMoreMessages = function ( { dispatch, state } ) {
 export const addMessage = function ( { dispatch, state } ) {
     // new message created on the server, dispatch it
     messageService.on( 'created', message => {
-        // play sound if message is from another user
-        //
         // so first, get the current user data
         const loggedUser = _.find( state.users, user => user._id == state.currentUser );
+
+        // play sound if message is from another user
         if ( ( state.currentUser != message.user_id ) && !loggedUser.status.muted && !state.windowFocused )
             $( '#audio-kozette-message' )[ 0 ].play();
 

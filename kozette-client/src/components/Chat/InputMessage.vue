@@ -1,7 +1,7 @@
 <template>
 
     <textarea class="input-message" v-model="inputMessage" placeholder="write here, you bitch." autofocus
-              autocomplete="off" v-on:keyup.enter="sendMessage"></textarea>
+              autocomplete="off" v-on:keydown.enter.prevent.stop="sendMessage"></textarea>
 
 </template>
 
@@ -34,7 +34,7 @@
             // update accordingly the @mentions system
             this.$watch( 'users', () => {
                 const usernames = this.users.map( user => user.nickname || user.email );
-                const commands = [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/unmute' ];
+                const commands = [ '/nick', '/color', '/me', '/status', '/pin', '/mute', '/notify' ];
                 $( '.input-message' )
                         .atwho( { at: '@', data: usernames, insertTpl: "${name}" } )
                         .atwho( { at: '/', data: commands, insertTpl: "${name}", limit: 30 } );
@@ -52,8 +52,6 @@
 
                 // if user isn't trying to just add a newline
                 if ( !e.shiftKey && !e.ctrlKey ) {
-
-                    e.preventDefault();
 
                     const text = this.inputMessage.trim();
 
