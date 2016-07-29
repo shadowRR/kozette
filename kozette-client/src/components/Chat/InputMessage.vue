@@ -1,7 +1,7 @@
 <template>
 
     <textarea class="input-message" v-model="inputMessage" placeholder="write here, you bitch." autofocus
-              autocomplete="off" v-on:keydown.enter.prevent.stop="sendMessage"></textarea>
+              autocomplete="off" v-on:keydown.enter="sendMessage"></textarea>
 
 </template>
 
@@ -52,6 +52,8 @@
 
                 // if user isn't trying to just add a newline
                 if ( !e.shiftKey && !e.ctrlKey ) {
+
+                    e.preventDefault();
 
                     const text = this.inputMessage.trim();
 
