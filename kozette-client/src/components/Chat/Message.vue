@@ -22,8 +22,7 @@
     import hljs from 'highlight.js';
     import EmbedJS from 'embed-js';
     // vuex
-    import { getUsersList } from '../../vuex/users_getters';
-    import { currentUser } from '../../vuex/currentUser_getters';
+    import { currentUser, getUsersList } from '../../vuex/getters/users';
 
     export default {
 

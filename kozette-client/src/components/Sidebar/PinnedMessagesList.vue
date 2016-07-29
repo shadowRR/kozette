@@ -9,9 +9,9 @@
 
 <script type="text/babel">
 
-    // pinned messages
-    import {getPinnedMessageList} from '../../vuex/messages_pinned_getters';
-    import {fetchPinnedMessages, addPinnedMessages, removePinnedMessages} from '../../vuex/messages_pinned_actions';
+    // vuex
+    import { getPinnedMessageList } from '../../vuex/getters/messages';
+    import { fetchPinnedMessages, addPinnedMessages, removePinnedMessages } from '../../vuex/actions/messages';
     // components
     import PinnedMessage from './PinnedMessage.vue';
 
@@ -21,21 +21,13 @@
 
         vuex: {
 
-            getters: {
-                pinnedMessages: getPinnedMessageList
-            },
+            getters: { pinnedMessages: getPinnedMessageList },
 
-            actions: {
-                fetchPinnedMessages,
-                addPinnedMessages,
-                removePinnedMessages
-            }
+            actions: { fetchPinnedMessages, addPinnedMessages, removePinnedMessages }
 
         },
 
         ready() {
-            // trigger watch on each dispatch available for
-            // the pinned messages list
             this.fetchPinnedMessages();
             this.addPinnedMessages();
             this.removePinnedMessages();

@@ -15,8 +15,8 @@ List of available commands :
 - `/me [*message*]` : add a direct message linked to the user and his color
 - `/status [*status(empty to remove)*]` : add a status on the users list
 - `/pin [*message*]` : in addition to adding a classic message, pin the message to stay always visible on the pinned messages panel
-- `/mute [ 'off' || *anything else* ]` : to mute sounds of the web app
-- `/notify [ 'off' || *anything else* ]`
+- `/mute [ 'off' || *anything else* ]` : to mute sounds
+- `/notify [ 'off' || *anything else* ]` : to mute the notifications
 
 User visual roles :
 

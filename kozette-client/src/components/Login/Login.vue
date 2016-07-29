@@ -3,7 +3,6 @@
     <div id="login-box">
         <img id="login-logo" src="/static/img/logo/kozette_large_transparent.png" alt="logo kozette">
         <form v-on:submit.prevent="login">
-            <p class="red-link">You have to create a new account, and you need an email now !</p>
             <div class="inputs">
                 <input type="text" id="email" name="email" placeholder="Email" v-model="email"/>
                 <br/>
@@ -21,8 +20,7 @@
     // services
     import { feathers_socket, userService } from '../../services';
     // vuex
-    import { loginCurrentUser } from '../../vuex/currentUser_actions';
-    import { currentUser } from '../../vuex/currentUser_getters';
+    import { loginCurrentUser } from '../../vuex/actions/users';
 
     export default {
 
@@ -35,8 +33,6 @@
 
         vuex: {
 
-            getters: { currentUser },
-
             actions: { loginCurrentUser }
 
         },
@@ -47,27 +43,25 @@
              * @summary login in
              */
             login() {
-                // authenticate
                 feathers_socket.authenticate( { type: 'token', email: this.email, password: this.password } )
-                        .then( ( user ) => {
-                            this.loginCurrentUser( user, feathers_socket.io.id );
-                            this.$router.go( { name: 'app' } );
-                        } )
-                        .catch( err => console.error( err ) );
+                    .then( user => {
+                        this.loginCurrentUser( user );
+                        this.$router.go( { name: 'app' } );
+                    } )
+                    .catch( err => console.error( err ) );
             },
 
             /**
              * @summary register a new user
              */
             register() {
-                // create new user
                 userService.create( { email: this.email, password: this.password } )
-                        .then( user => {
-                            this.email = '';
-                            this.password = '';
-                            alert( 'user created - you can now log in' );
-                        } )
-                        .catch( err => console.error( err ) );
+                    .then( user => {
+                        this.email = '';
+                        this.password = '';
+                        alert( 'user created - you can now log in' );
+                    } )
+                    .catch( err => console.error( err ) );
             }
 
         }

@@ -46,11 +46,11 @@
     // feathers
     import { feathers_socket } from '../services';
     // vuex
-    import { currentUser } from '../vuex/currentUser_getters';
-    import { loginCurrentUser } from '../vuex/currentUser_actions';
-    import { serverConnectionChange } from '../vuex/isServerConnected_actions';
-    import { windowFocusChange } from '../vuex/windowFocus_actions';
-    import { fetchMessages } from '../vuex/messages_actions.js';
+    import { currentUser } from '../vuex/getters/users';
+    import { loginCurrentUser } from '../vuex/actions/users';
+    import { serverConnectionChange } from '../vuex/actions/server';
+    import { windowFocusChange } from '../vuex/actions/window';
+    import { fetchMessages } from '../vuex/actions/messages';
 
     export default {
 
@@ -65,59 +65,67 @@
         },
 
         created() {
-            // auth the current user
-            const authenticate = () => {
+            // if not connected, authenticate back the user if possible
+            // (mainly triggered when user is reloading the page)
+            if ( !this.currentUser )
+                this.authenticate( true );
+
+            // catch events on disconnect and reconnect for the 
+            // websockets connection, so we can show the actual 
+            // socket status and re-authenticate the user if needed
+            feathers_socket.io
+                .on( 'reconnect', () => this.authenticate( true ) )
+                .on( 'disconnect', () => this.authenticate( false ) );
+        },
+
+        ready() {
+            this.splitView();
+            this.windowFocus();
+        },
+
+        methods: {
+
+            /**
+             * @summary re-authenticate the user when needed
+             */
+            authenticate() {
+                this.serverConnectionChange( server );
                 feathers_socket.authenticate()
                     .then( user => {
                         this.loginCurrentUser( user );
                         this.fetchMessages();
                     } )
                     .catch( () => this.$router.go( { name: 'login' } ) );
-            };
+            },
 
-            // if not connected, authenticate
-            // (mainly triggered when user is reloading the page)
-            if ( !this.currentUser )
-                authenticate();
-
-            // catch events on disconnect and reconnect for
-            // the websockets connection, so we can show the
-            // actual socket status and re-authenticate the user
-            // if needed
-            feathers_socket.io
-                .on( 'reconnect', () => {
-                    this.serverConnectionChange( true );
-                    authenticate();
-                } )
-                .on( 'disconnect', () => {
-                    this.serverConnectionChange( false );
+            /**
+             * @summary activate split plugin
+             */
+            splitView() {
+                Split( [ '#content', '#sidebar' ], {
+                    sizes: [ 85, 15 ],
+                    minSize: [ 400, 200 ],
+                    gutterSize: 8,
+                    cursor: 'col-resize'
                 } );
-        },
 
-        ready() {
+                Split( [ '#nav', '#pinned' ], {
+                    direction: 'vertical',
+                    sizes: [ 75, 25 ],
+                    gutterSize: 8,
+                    cursor: 'row-resize'
+                } );
+            },
 
-            Split( [ '#content', '#sidebar' ], {
-                sizes: [ 85, 15 ],
-                minSize: [ 400, 200 ],
-                gutterSize: 8,
-                cursor: 'col-resize'
-            } );
+            /**
+             * @summary make sure the app knows when the user is focus 
+             * on the page, so we don't show notifications or play sound
+             * when he/she is already looking at the app
+             */
+            windowFocus() {
+                $( window ).on( 'focus blur mousemove', e => this.windowFocusChange( e.type != 'blur' ) );
+            }
 
-            Split( [ '#nav', '#pinned' ], {
-                direction: 'vertical',
-                sizes: [ 75, 25 ],
-                gutterSize: 8,
-                cursor: 'row-resize'
-            } );
-
-            // to know if page is focused or not i
-            // the entire application
-            $( window ).on( 'focus blur mousemove', ( e ) => {
-                // set the proper window focus based
-                // on the actual focus state
-                this.windowFocusChange( e.type != 'blur' );
-
-            } );
         }
         
     }

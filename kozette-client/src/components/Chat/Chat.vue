@@ -20,7 +20,7 @@
     import MessageList from './MessageList.vue';
     import InputMessage from './InputMessage.vue';
     // vuex
-    import { fetchMoreMessages } from '../../vuex/messages_actions';
+    import { fetchMoreMessages } from '../../vuex/actions/messages';
 
     export default {
 
@@ -48,12 +48,8 @@
                 cursor: 'row-resize'
             } );
 
-            // scroll on load the first time
             this.scrollToBottom();
-            // interval for autoScrolling behavior
-            setInterval( () => {
-                this.autoScrollingActive && this.scrollToBottom();
-            }, 1000 );
+            setInterval( () => this.autoScrollingActive && this.scrollToBottom() , 1000 );
 
         },
 

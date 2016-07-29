@@ -8,7 +8,7 @@
 
 <script>
 
-    // data
+    // vuex
     import store from '../vuex/store.js';
 
     export default { store }

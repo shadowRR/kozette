@@ -15,28 +15,20 @@
 <script type="text/babel">
 
     // vuex
-    import { getUsersList} from '../../vuex/users_getters.js';
-    import { fetchUsers, addUser, updateAndPatchUser } from '../../vuex/users_actions.js';
+    import { getUsersList } from '../../vuex/getters/users';
+    import { fetchUsers, addUser, updateAndPatchUser } from '../../vuex/actions/users';
 
     export default {
 
         vuex: {
 
-            getters: {
-                users: getUsersList
-            },
+            getters: { users: getUsersList },
 
-            actions: {
-                fetchUsers,
-                addUser,
-                updateAndPatchUser
-            }
+            actions: { fetchUsers, addUser, updateAndPatchUser }
 
         },
 
         created() {
-            // trigger watch on each dispatch available
-            // for the users list
             this.fetchUsers();
             this.addUser();
             this.updateAndPatchUser();

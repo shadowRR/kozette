@@ -1,6 +1,8 @@
 'use strict';
 
+import * as types from '../mutation-types';
+
 export const windowFocusChange = function ( { dispatch }, value ) {
     // persist in state the window focus status
-    dispatch( 'WINDOW_FOCUS', value );
+    dispatch( types.WINDOW_FOCUS, value );
 };

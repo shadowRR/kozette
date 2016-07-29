@@ -21,10 +21,9 @@
     // feathers
     import { feathers_socket, userService } from '../../services';
     // vuex
-    import { currentUser } from '../../vuex/currentUser_getters';
-    import { loginCurrentUser, logoutCurrentUser } from '../../vuex/currentUser_actions';
-    import { getUsersList } from '../../vuex/users_getters';
-    import { isServerConnected } from '../../vuex/isServerConnected_getters';
+    import { loginCurrentUser, logoutCurrentUser } from '../../vuex/actions/users';
+    import { currentUser, getUsersList } from '../../vuex/getters/users';
+    import { isServerConnected } from '../../vuex/getters/server';
 
     export default {
 
@@ -43,26 +42,14 @@
         },
 
         ready() {
-            // patch user online status and
-            const patchUser = () => {
-                // only try to patch if connected to server
-                if ( feathers_socket.io.connected && this.currentUser )
-                    userService.patch( this.currentUser, { 'status.online': true, 'status.lastSeen': new Date() } )
-                            .catch( err => console.error( err ) );
-            };
-
-            // execute the first time in init since loading
-            // this function means the user just connected
-            patchUser();
-
-            // set the interval every minutes
-            this.interval = setInterval( () => patchUser(), 1000 * 10 );
+            this.keepUserOnline();
         },
 
         computed: {
 
             /**
              * @summary return proper logo based on muted value
+             * @return {string}
              */
             logoIsMuted() {
                 const user = _.find( this.getUsersList, user => user._id == this.currentUser );
@@ -76,13 +63,30 @@
         methods: {
 
             /**
+             * @summary patch the user online status on regular interval
+             */
+            keepUserOnline() {
+                const patchUser = () => {
+                    if ( feathers_socket.io.connected && this.currentUser )
+                        userService.patch( this.currentUser, { 'status.online': true, 'status.lastSeen': new Date() } )
+                            .catch( err => console.error( err ) );
+                };
+
+                patchUser();
+                this.interval = setInterval( () => patchUser(), 1000 * 10 );
+            }
+
+            /**
              * @summary logout the user
              */
             logout() {
+
                 // logout from feathers token
                 feathers_socket.logout();
+
                 // reset state
                 this.logoutCurrentUser();
+
                 // clear the user status interval check
                 clearInterval( this.interval );
                 this.$router.go( { name: 'login' } );

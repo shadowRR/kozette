@@ -8,8 +8,10 @@
 
 <script type="text/babel">
 
-    import { fetchMessages, addMessage } from '../../vuex/messages_actions.js';
-    import { getMessagesList } from '../../vuex/messages_getters';
+    // vuex
+    import { fetchMessages, addMessage } from '../../vuex/actions/messages';
+    import { getMessagesList } from '../../vuex/getters/messages';
+    // components
     import Message from './Message.vue';
 
     export default {
@@ -25,7 +27,6 @@
         },
 
         ready() {
-            // init messages state
             this.fetchMessages();
             this.addMessage();
         }

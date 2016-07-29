@@ -7,9 +7,11 @@
 
 <script type="text/babel">
 
-    import { currentUser } from '../../vuex/currentUser_getters';
-    import { getUsersList } from '../../vuex/users_getters.js';
+    // vuex
+    import { currentUser, getUsersList } from '../../vuex/getters/users';
+    // lib
     import Commands from '../../plugins/kozette_commands';
+    // services
     import { messageService } from '../../services';
 
     export default {
@@ -22,10 +24,7 @@
 
         vuex: {
 
-            getters: {
-                currentUser,
-                users: getUsersList
-            }
+            getters: { currentUser, users: getUsersList }
 
         },
 
