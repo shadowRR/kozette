@@ -3,7 +3,8 @@
   "port": 3030,
   "mongodb": {
     "development": "mongodb://192.168.99.100:32772/kozette",
-    "test": "mongodb://192.168.99.100:32772/kozette-test"
+    "test": "mongodb://192.168.99.100:32772/kozette-test",
+    "travis": "mongodb://127.0.0.1:27017/kozette-test"
   },
   "public": "",
   "auth": {
