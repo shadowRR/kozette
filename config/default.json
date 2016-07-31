@@ -1,0 +1,15 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": {
+    "development": "mongodb://192.168.99.100:32772/kozette",
+    "test": "mongodb://192.168.99.100:32772/kozette-test"
+  },
+  "public": "",
+  "auth": {
+    "token": {
+      "secret": "Po9qXXaFL7ZlWRWGSCW5lCXQYZ2NstshlBaOJ7VMizl0ZT/3KBuayeqYgBdxG0p6u+HZzKJCgn153npLf+kIwg=="
+    },
+    "local": {}
+  }
+}
