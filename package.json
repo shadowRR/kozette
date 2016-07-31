@@ -20,7 +20,8 @@
     "mocha": "mocha test/ --recursive",
     "jshint": "jshint src/. test/. --config",
     "test": "npm run jshint && env NODE_ENV=test npm run mocha",
-    "travis": "npm run jshint && env NODE_ENV=travis npm run mocha"
+    "travis": "npm run jshint && env NODE_ENV=travis npm run mocha",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "compression": "^1.6.1",
@@ -43,7 +44,10 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "coveralls": "^2.11.12",
+    "istanbul": "^0.4.4",
     "jshint": "^2.9.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0"
   }
 }
