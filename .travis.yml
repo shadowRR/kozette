@@ -4,4 +4,4 @@ node_js:
 services: mongodb
 before_script:
   - sleep 15
-script: "npm travis"
+script: "npm run travis"
